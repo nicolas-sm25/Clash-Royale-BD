@@ -1,30 +1,27 @@
 package ui;
 
-import dao.ConexionDB;
-import java.sql.Connection;
-import java.sql.SQLException;
+import dao.CartaDAO;
+import model.Carta;
+import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
+        CartaDAO dao = new CartaDAO();
 
+        Scanner leer =  new Scanner(System.in);
 
-        //Prueba de coneccion con la BD
-        try {
+        System.out.println("Ingrese el nombre de la carta");
+        String nombre = leer.nextLine();
+        System.out.println("Ingrese el costo de elixir");
+        int elixir = leer.nextInt();
+        leer.nextLine();
+        System.out.println("Ingrese la rareza");
+        String rareza = leer.nextLine();
+        System.out.println("Ingrese el tipo");
+        String tipo = leer.nextLine();
+        Carta carta = new Carta(nombre, elixir, rareza, tipo);
 
-            Connection conn = ConexionDB.getConnection();
-
-            if(conn != null){
-                System.out.println("Conectado correctamente");
-            }
-
-        } catch(SQLException e){
-
-            System.out.println("Error de conexión");
-            System.out.println(e.getMessage());
-
-        }
-
+        dao.insertarCarta(carta);
     }
 
 }

@@ -4,14 +4,14 @@ package model;
 
 public class Carta{
     private int id;
-    private int elixir;
     private String nombre;
+    private int elixir;
     private String rareza;
     private String tipo;
 
 //Constructor
 
-    public Carta( int elixir, String nombre, String rareza, String tipo) {
+    public Carta(String nombre, int elixir, String rareza, String tipo) {
         this.elixir = elixir;
         this.nombre = nombre;
         this.rareza = rareza;
