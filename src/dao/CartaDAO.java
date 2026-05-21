@@ -12,7 +12,6 @@ public class CartaDAO {
     //Metodo para adicionar una carta a la BD
     public void insertarCarta(Carta carta){
         String add_carta = "INSERT INTO cartas (nombre, costo, rareza, tipo) VALUES (?,?,?,?)";
-
         try (Connection conn = ConexionDB.getConnection();
              PreparedStatement query_insert = conn.prepareStatement(add_carta)
         ) {
@@ -21,7 +20,6 @@ public class CartaDAO {
             query_insert.setString(3,carta.getRareza());
             query_insert.setString(4, carta.getTipo());
             query_insert.executeUpdate();
-
             System.out.println("Carta adicionada correctamente");
         }
         catch (SQLException e)
@@ -33,15 +31,11 @@ public class CartaDAO {
 
     //Metodo para mostrar la tabla completa
     public List<Carta> listarCartas() {
-
         List<Carta> lista = new ArrayList<>();
-
         String sql = "SELECT * FROM cartas";
-
         try (Connection conn = ConexionDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
-
             while (rs.next()) {
                 Carta carta = new Carta(
                         rs.getString("nombre"),
@@ -49,15 +43,59 @@ public class CartaDAO {
                         rs.getString("rareza"),
                         rs.getString("tipo")
                 );
-
                 carta.setId(rs.getInt("id"));
                 lista.add(carta);
             }
-
         } catch (SQLException e) {
-            System.out.println("Error listando cartas: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
+        return lista;
+    }
 
+    //Metodo para buscar por ID
+    public Carta buscarPorId(int id) {
+        String sql = "SELECT * FROM cartas WHERE id = ?";
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Carta carta = new Carta(
+                        rs.getString("nombre"),
+                        rs.getInt("costo"),
+                        rs.getString("rareza"),
+                        rs.getString("tipo")
+                );
+                carta.setId(rs.getInt("id"));
+                return carta;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return null;
+    }
+
+    //Metodo para buscar por nombre
+    public List<Carta> buscarPorNombre(String nombre) {
+        List<Carta> lista = new ArrayList<>();
+        String sql = "SELECT * FROM cartas WHERE nombre LIKE ?";
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, "%" + nombre + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Carta carta = new Carta(
+                        rs.getString("nombre"),
+                        rs.getInt("costo"),
+                        rs.getString("rareza"),
+                        rs.getString("tipo")
+                );
+                carta.setId(rs.getInt("id"));
+                lista.add(carta);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
         return lista;
     }
 }
