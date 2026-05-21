@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CartaDAO {
 
+    //Metodo para adicionar una carta a la BD
     public void insertarCarta(Carta carta){
         String add_carta = "INSERT INTO cartas (nombre, costo, rareza, tipo) VALUES (?,?,?,?)";
 
@@ -27,9 +28,37 @@ public class CartaDAO {
         {
             System.err.println("Error: "+e.getMessage());
         }
-
     }
 
 
+    //Metodo para mostrar la tabla completa
+    public List<Carta> listarCartas() {
 
+        List<Carta> lista = new ArrayList<>();
+
+        String sql = "SELECT * FROM cartas";
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Carta carta = new Carta(
+                        rs.getString("nombre"),
+                        rs.getInt("costo"),
+                        rs.getString("rareza"),
+                        rs.getString("tipo")
+                );
+
+                carta.setId(rs.getInt("id"));
+                lista.add(carta);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error listando cartas: " + e.getMessage());
+        }
+
+        return lista;
+    }
 }
+

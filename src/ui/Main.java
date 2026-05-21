@@ -2,6 +2,8 @@ package ui;
 
 import dao.CartaDAO;
 import model.Carta;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -36,6 +38,14 @@ public class Main {
                     break;
 
                 case 2:
+                    List<Carta> cartas = dao.listarCartas();
+
+                    System.out.println("\n=== TABLA COMPLETA DE CARTAS ===");
+
+                    for (Carta c : cartas) {
+                        System.out.println(c);
+                    }
+
 
                     break;
 
