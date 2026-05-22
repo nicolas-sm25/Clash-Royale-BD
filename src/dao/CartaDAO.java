@@ -1,6 +1,5 @@
 package dao;
 
-import dao.ConexionDB;
 import model.Carta;
 
 import java.sql.*;
@@ -9,24 +8,25 @@ import java.util.List;
 
 public class CartaDAO {
 
-    //Metodo para adicionar una carta a la BD
-    public void insertarCarta(Carta carta){
-        String add_carta = "INSERT INTO cartas (nombre, costo, rareza, tipo) VALUES (?,?,?,?)";
+    //Metodo para agregar una carta a la BD
+    public void agregarCarta(Carta carta){
+
+        String agregarCartaSQL = "INSERT INTO cartas (nombre, costo, rareza, tipo) VALUES (?,?,?,?)";
+
         try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement query_insert = conn.prepareStatement(add_carta)
-        ) {
-            query_insert.setString(1,carta.getNombre());
-            query_insert.setInt(2,carta.getElixir());
-            query_insert.setString(3,carta.getRareza());
-            query_insert.setString(4, carta.getTipo());
-            query_insert.executeUpdate();
+             PreparedStatement psAggCarta = conn.prepareStatement(agregarCartaSQL)) {
+
+            psAggCarta.setString(1,carta.getNombre());
+            psAggCarta.setInt(2,carta.getElixir());
+            psAggCarta.setString(3,carta.getRareza());
+            psAggCarta.setString(4, carta.getTipo());
+            psAggCarta.executeUpdate();
+
             System.out.println("Carta adicionada correctamente");
-        }
-        catch (SQLException e)
-        {
-            System.err.println("Error: "+e.getMessage());
-        }
-    }
+
+        } catch (SQLException error) {
+            System.err.println("Error: " + error.getMessage());
+        }}
 
 
     //Metodo para mostrar la tabla completa

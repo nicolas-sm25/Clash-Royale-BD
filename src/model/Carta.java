@@ -60,8 +60,8 @@ public class Carta{
         this.tipo = tipo;
     }
 
-//Metodo toString()
 
+//Metodo toString()
     @Override
     public String toString() {
         return "Carta{" +

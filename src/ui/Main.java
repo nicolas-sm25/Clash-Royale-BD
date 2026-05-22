@@ -2,12 +2,11 @@ package ui;
 
 import dao.CartaDAO;
 import model.Carta;
-
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    static void main(String[] args ) {
         CartaDAO dao = new CartaDAO();
         Scanner leer =  new Scanner(System.in);
 
@@ -16,13 +15,15 @@ public class Main {
             System.out.println("1. Insertar carta");
             System.out.println("2. Consultar todas");
             System.out.println("3. Buscar una carta");
-            System.out.println("4. Buscar una carta");
+            System.out.println("4. Buscar con filtros");
             System.out.println("5. Salir");
             System.out.print("Opción: ");
 
-            int opcion1 = leer.nextInt();
+            int op1 = leer.nextInt();
             leer.nextLine();
-            switch (opcion1) {
+
+            switch (op1) {
+
                 case 1:
                     System.out.println("Ingrese el nombre de la carta");
                     String nombre = leer.nextLine();
@@ -34,7 +35,7 @@ public class Main {
                     System.out.println("Ingrese el tipo");
                     String tipo = leer.nextLine();
                     Carta carta = new Carta(nombre, elixir, rareza, tipo);
-                    dao.insertarCarta(carta);
+                    dao.agregarCarta(carta);
                     break;
 
                 case 2:
@@ -51,9 +52,10 @@ public class Main {
                     System.out.println("2. Nombre");
                     System.out.print("Opción: ");
 
-                    int opcion2 = leer.nextInt();
+                    int op2 = leer.nextInt();
                     leer.nextLine();
-                    switch (opcion2) {
+
+                    switch (op2) {
                         case 1:
                             System.out.print("Ingrese ID: ");
                             int idAEncontrar = leer.nextInt();
@@ -85,9 +87,9 @@ public class Main {
                     }
                     break;
 
+                case 4:
 
-
-
+                break;
 
                 case 5:
                     System.out.println("Bye bye");
@@ -97,8 +99,5 @@ public class Main {
                     System.out.println("Opción inválida, intente de nuevo.");
             }
         }
-
-
     }
-
 }
