@@ -25,25 +25,35 @@ public class Main {
             switch (op1) {
 
                 case 1:
+
                     System.out.println("Ingrese el nombre de la carta");
                     String nombre = leer.nextLine();
+
                     System.out.println("Ingrese el costo de elixir");
                     int elixir = leer.nextInt();
-                    leer.nextLine();
+                    leer.nextInt();
+
                     System.out.println("Ingrese la rareza");
                     String rareza = leer.nextLine();
+
                     System.out.println("Ingrese el tipo");
                     String tipo = leer.nextLine();
+
                     Carta carta = new Carta(nombre, elixir, rareza, tipo);
                     dao.agregarCarta(carta);
+
                     break;
 
                 case 2:
-                    List<Carta> cartas = dao.listarCartas();
+
+                    List<Carta> listaCartas = dao.listaCartas();
+
                     System.out.println("\n=== TABLA COMPLETA DE CARTAS ===");
-                    for (Carta c : cartas) {
-                        System.out.println(c);
+
+                    for (Carta listCAux : listaCartas) {
+                        System.out.println(listCAux);
                     }
+
                     break;
 
                 case 3:

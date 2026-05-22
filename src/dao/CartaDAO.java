@@ -30,26 +30,30 @@ public class CartaDAO {
 
 
     //Metodo para mostrar la tabla completa
-    public List<Carta> listarCartas() {
-        List<Carta> lista = new ArrayList<>();
-        String sql = "SELECT * FROM cartas";
+    public List<Carta> listaCartas() {
+
+        List<Carta> listaCartas = new ArrayList<>();
+        String listaCartasSQL = "SELECT * FROM cartas";
+
         try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
+             PreparedStatement psListCartas = conn.prepareStatement(listaCartasSQL);
+             ResultSet rsListCartas = psListCartas.executeQuery()) {
+
+            while (rsListCartas.next()) {
+
                 Carta carta = new Carta(
-                        rs.getString("nombre"),
-                        rs.getInt("costo"),
-                        rs.getString("rareza"),
-                        rs.getString("tipo")
-                );
-                carta.setId(rs.getInt("id"));
-                lista.add(carta);
+                        rsListCartas.getString("nombre"),
+                        rsListCartas.getInt("costo"),
+                        rsListCartas.getString("rareza"),
+                        rsListCartas.getString("tipo"));
+
+                carta.setId(rsListCartas.getInt("id"));
+                listaCartas.add(carta);
             }
+
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
-        }
-        return lista;
+        } return listaCartas;
     }
 
     //Metodo para buscar por ID

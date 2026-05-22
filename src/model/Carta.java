@@ -64,12 +64,6 @@ public class Carta{
 //Metodo toString()
     @Override
     public String toString() {
-        return "Carta{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", rareza='" + rareza + '\'' +
-                ", elixir=" + elixir +
-                ", tipo='" + tipo + '\'' +
-                '}';
+        return "| Id = " + id + " | Nombre = " + nombre + " | Rareza = " + rareza + " | Elixir = " + elixir + " | Tipo = " + tipo + " |";
     }
 }
