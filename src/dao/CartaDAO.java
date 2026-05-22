@@ -202,5 +202,35 @@ public class CartaDAO {
 
         } return listaElixirMayor;
     }
+
+
+    //Metodo para buscar por rareza
+    public List<Carta> encontrarRareza(String rarezaAEncontrar) {
+
+        List<Carta> listaRareza = new ArrayList<>();
+        String encontrarRarezaSQL = "SELECT * FROM cartas WHERE rareza = ?";
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement psRareza = conn.prepareStatement(encontrarRarezaSQL)) {
+
+            psRareza.setString(1, rarezaAEncontrar);
+            ResultSet rsRareza = psRareza.executeQuery();
+
+            while (rsRareza.next()) {
+
+                Carta carta = new Carta(
+                        rsRareza.getString("nombre"),
+                        rsRareza.getInt("costo"),
+                        rsRareza.getString("rareza"),
+                        rsRareza.getString("tipo"));
+
+                carta.setId(rsRareza.getInt("id"));
+                listaRareza.add(carta);
+            } } catch (SQLException e) {
+
+            System.out.println("Error: " + e.getMessage());
+
+        } return listaRareza;
+    }
 }
 

@@ -206,17 +206,99 @@ public class Main {
                             }
 
                         case 2:
-                            break;
+
+                            System.out.println("1. Común");
+                            System.out.println("2. Especial");
+                            System.out.println("3. Épica");
+                            System.out.println("4. Legendaria");
+                            System.out.println("5. Campeón");
+                            System.out.print("Opción: ");
+
+                            int opRareza = leer.nextInt();
+                            leer.nextLine();
+
+                            switch (opRareza) {
+
+                                case 1:
+
+                                    List<Carta> rarezaComúnEncontrada = dao.encontrarRareza("Común");
+
+                                        for (Carta raComEncAUX : rarezaComúnEncontrada) {
+
+                                            System.out.println(raComEncAUX);
+
+                                        }
+                                    break;
+
+
+                                case 2:
+
+                                    List<Carta> rarezaEspecialEncontrada = dao.encontrarRareza("Especial");
+
+                                    for (Carta raEspEncAUX : rarezaEspecialEncontrada) {
+
+                                        System.out.println(raEspEncAUX);
+
+                                    }
+                                    break;
+
+
+
+                                case 3:
+
+                                    List<Carta> rarezaEpicaEncontrada = dao.encontrarRareza("Épica");
+
+                                    for (Carta raEpcEncAUX : rarezaEpicaEncontrada) {
+
+                                        System.out.println(raEpcEncAUX);
+
+                                    }
+                                    break;
+
+
+
+                                case 4:
+
+                                    List<Carta> rarezaLegendariaEncontrada = dao.encontrarRareza("Legendaria");
+
+                                    for (Carta raLegEncAUX : rarezaLegendariaEncontrada) {
+
+                                        System.out.println(raLegEncAUX);
+
+                                    }
+                                    break;
+
+
+                                case 5:
+
+                                    List<Carta> rarezaCampeonEncontrada = dao.encontrarRareza("Campeón");
+
+                                    for (Carta raCamEncAUX : rarezaCampeonEncontrada) {
+
+                                        System.out.println(raCamEncAUX);
+
+                                    }
+                                    break;
+
+
+                                default:
+                                    System.out.println("Opción inválida, intente de nuevo.");
+                            }
+
+                                break;
 
                         default:
                             System.out.println("Opción inválida, intente de nuevo.");
                     }
+
 
                 break;
 
                 case 5:
                     System.out.println("Bye bye");
                     return;
+
+
 
                 default:
                     System.out.println("Opción inválida, intente de nuevo.");
