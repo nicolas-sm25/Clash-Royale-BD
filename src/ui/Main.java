@@ -15,7 +15,7 @@ public class Main {
             System.out.println("1. Insertar carta");
             System.out.println("2. Consultar todas");
             System.out.println("3. Buscar una carta");
-            System.out.println("4. Buscar con filtros");
+            System.out.println("4. Filtrar");
             System.out.println("5. Salir");
             System.out.print("Opción: ");
 
@@ -31,7 +31,7 @@ public class Main {
 
                     System.out.println("Ingrese el costo de elixir");
                     int elixir = leer.nextInt();
-                    leer.nextInt();
+                    leer.nextLine();
 
                     System.out.println("Ingrese la rareza");
                     String rareza = leer.nextLine();
@@ -66,30 +66,45 @@ public class Main {
                     leer.nextLine();
 
                     switch (op2) {
+
                         case 1:
+
                             System.out.print("Ingrese ID: ");
                             int idAEncontrar = leer.nextInt();
                             leer.nextLine();
-                            Carta c = dao.buscarPorId(idAEncontrar);
-                            if (c != null) {
-                                System.out.println(c);
+
+                            Carta cartaEncontrada = dao.buscarPorId(idAEncontrar);
+
+                            if (cartaEncontrada != null) {
+
+                                System.out.println(cartaEncontrada);
+
                             } else {
+
                                 System.out.println("No existe carta con ese ID");
+
                             }
+
                             break;
 
                         case 2:
-                            System.out.print("Ingrese nombre: ");
-                            String nombreABuscar = leer.nextLine();
-                            List<Carta> resultados = dao.buscarPorNombre(nombreABuscar);
 
-                            if (resultados.isEmpty()) {
+                            System.out.print("Ingrese el nombre a buscar: ");
+                            String nombreABuscar = leer.nextLine();
+                            List<Carta> nombresEncontrados = dao.buscarPorNombre(nombreABuscar);
+
+                            if (nombresEncontrados.isEmpty()) {
+
                                 System.out.println("No se encontraron cartas");
+
                             } else {
-                                for (Carta cartaEncontrada : resultados) {
-                                    System.out.println(cartaEncontrada);
-                                }
-                            }
+
+                                for (Carta nomEncAUX : nombresEncontrados) {
+
+                                    System.out.println(nomEncAUX);
+
+                                } }
+
                             break;
 
                         default:
