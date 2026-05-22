@@ -19,10 +19,10 @@ public class Main {
             System.out.println("5. Salir");
             System.out.print("Opción: ");
 
-            int op1 = leer.nextInt();
+            int opPrinc = leer.nextInt();
             leer.nextLine();
 
-            switch (op1) {
+            switch (opPrinc) {
 
                 case 1:
 
@@ -62,10 +62,10 @@ public class Main {
                     System.out.println("2. Nombre");
                     System.out.print("Opción: ");
 
-                    int op2 = leer.nextInt();
+                    int opBuscar = leer.nextInt();
                     leer.nextLine();
 
-                    switch (op2) {
+                    switch (opBuscar) {
 
                         case 1:
 
@@ -113,6 +113,104 @@ public class Main {
                     break;
 
                 case 4:
+
+                    System.out.println("\nFiltrar por:");
+                    System.out.println("1. Elixir");
+                    System.out.println("2. Rareza");
+                    System.out.println("3. Tipo");
+                    System.out.print("Opción: ");
+
+                    int opFiltrar = leer.nextInt();
+                    leer.nextLine();
+
+                    switch (opFiltrar) {
+
+                        case 1:
+
+                            System.out.println("1. Elixir = X");
+                            System.out.println("2. Elixir < X");
+                            System.out.println("3. Elixir > X");
+                            System.out.print("Opción: ");
+
+                            int opElixir = leer.nextInt();
+                            leer.nextLine();
+
+                            switch (opElixir) {
+
+                                case 1:
+
+                                    System.out.print("Elixir = ");
+                                    int ElixirIgual = leer.nextInt();
+                                    leer.nextLine();
+
+                                    List<Carta> elixIgEncontrado = dao.elixirIgual(ElixirIgual);
+
+                                    if (elixIgEncontrado.isEmpty()) {
+
+                                        System.out.println("No se encontraron cartas");
+
+                                    } else {
+
+                                        for (Carta elxIgEncAUX : elixIgEncontrado) {
+
+                                            System.out.println(elxIgEncAUX);
+
+                                        } }
+                                    break;
+
+                                case 2:
+
+                                    System.out.print("Elixir < ");
+                                    int ElixirMenor = leer.nextInt();
+                                    leer.nextLine();
+
+                                    List<Carta> elixMenEncontrado = dao.elixirMenor(ElixirMenor);
+
+                                    if (elixMenEncontrado.isEmpty()) {
+
+                                        System.out.println("No se encontraron cartas");
+
+                                    } else {
+
+                                        for (Carta elxIgEncAUX : elixMenEncontrado) {
+
+                                            System.out.println(elxIgEncAUX);
+
+                                        } }
+                                    break;
+
+
+                                case 3:
+
+                                    System.out.print("Elixir > ");
+                                    int ElixirMayor = leer.nextInt();
+                                    leer.nextLine();
+
+                                    List<Carta> elixMayEncontrado = dao.elixirMayor(ElixirMayor);
+
+                                    if (elixMayEncontrado.isEmpty()) {
+
+                                        System.out.println("No se encontraron cartas");
+
+                                    } else {
+
+                                        for (Carta elxIgEncAUX : elixMayEncontrado) {
+
+                                            System.out.println(elxIgEncAUX);
+
+                                        } }
+                                    break;
+
+                                default:
+                                    System.out.println("Opción inválida, intente de nuevo.");
+                            }
+
+                        case 2:
+                            break;
+
+                        default:
+                            System.out.println("Opción inválida, intente de nuevo.");
+                    }
 
                 break;
 
