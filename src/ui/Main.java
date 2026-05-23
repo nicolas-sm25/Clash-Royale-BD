@@ -256,17 +256,100 @@ public class Main {
 
                                 break;
 
+                        case 3:
+
+                            System.out.println("\n1. Tropa");
+                            System.out.println("2. Estructura");
+                            System.out.println("3. Hechizo");
+                            System.out.println("4. Tropa de torre");
+                            System.out.print("Opción: ");
+
+                            int opTipo = leer.nextInt();
+                            leer.nextLine();
+
+                            switch (opTipo) {
+
+                                case 1:
+
+                                    List<Carta> tipoTropaEncontrada = dao.encontrarTipo("Tropa");
+
+                                    System.out.print("\n");
+
+                                    for (Carta tiTroEncAUX : tipoTropaEncontrada) {
+
+                                        System.out.println(tiTroEncAUX);
+
+                                    }
+
+                                    break;
+
+
+                                case 2:
+
+                                    List<Carta> tipoEstructuraEncontrada = dao.encontrarTipo("Estructura");
+
+                                    System.out.print("\n");
+
+                                    for (Carta tiEstEncAUX : tipoEstructuraEncontrada) {
+
+                                        System.out.println(tiEstEncAUX);
+
+                                    }
+
+                                    break;
+
+
+
+                                case 3:
+
+                                    List<Carta> tipoHechizoEncontrada = dao.encontrarTipo("Hechizo");
+
+                                    System.out.print("\n");
+
+                                    for (Carta tiHecEncAUX : tipoHechizoEncontrada) {
+
+                                        System.out.println(tiHecEncAUX);
+
+                                    }
+
+                                    break;
+
+
+
+                                case 4:
+
+                                    List<Carta> tipoTroTorreEncontrada = dao.encontrarTipo("Tropa de torre");
+
+                                    System.out.print("\n");
+
+                                    for (Carta tiTdTEncAUX : tipoTroTorreEncontrada) {
+
+                                        System.out.println(tiTdTEncAUX);
+
+                                    }
+
+                                    break;
+
+
+
+                                default:
+                                    System.out.println("\nOpción inválida, intente de nuevo.");
+                            }
+
+                            break;
+
+
                         default:
                             System.out.println("\nOpción inválida, intente de nuevo.");
                     }
 
-
-                break;
+                    break;
 
                 case 5:
-                    System.out.println("\nBye bye");
-                    return;
 
+                    System.out.println("\nBye bye");
+
+                    return;
 
 
                 default:

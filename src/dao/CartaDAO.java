@@ -174,5 +174,35 @@ public class CartaDAO {
 
         } return listaRareza;
     }
+
+
+    //Metodo para buscar por tipo
+    public List<Carta> encontrarTipo(String tipoAEncontrar) {
+
+        List<Carta> listaTipo = new ArrayList<>();
+        String encontrarTipoSQL = "SELECT * FROM cartas WHERE tipo = ?";
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement psTipo = conn.prepareStatement(encontrarTipoSQL)) {
+
+            psTipo.setString(1, tipoAEncontrar);
+            ResultSet rsTipo = psTipo.executeQuery();
+
+            while (rsTipo.next()) {
+
+                Carta carta = new Carta(
+                        rsTipo.getString("nombre"),
+                        rsTipo.getInt("costo"),
+                        rsTipo.getString("rareza"),
+                        rsTipo.getString("tipo"));
+
+                carta.setId(rsTipo.getInt("id"));
+                listaTipo.add(carta);
+            } } catch (SQLException e) {
+
+            System.out.println("Error: " + e.getMessage());
+
+        } return listaTipo;
+    }
 }
 
