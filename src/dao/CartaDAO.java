@@ -85,6 +85,8 @@ public class CartaDAO {
         } return null;
     }
 
+
+
     //Metodo para buscar por nombre
     public List<Carta> buscarPorNombre(String nombre) {
 
@@ -114,93 +116,33 @@ public class CartaDAO {
     }
 
 
-    //Metodo para buscar por Elixir = X
-    public List<Carta> elixirIgual(int elixirIgualAEncontrar) {
+    //Metodo para buscar por elixir
+    public List<Carta> encontrarElixir(String operador, int elixirAEncontrar) {
 
-        List<Carta> listaElixirIgual = new ArrayList<>();
-        String elixirIgualSQL = "SELECT * FROM cartas WHERE costo = ?";
+        List<Carta> listaElixir = new ArrayList<>();
+        String encontrarElixirSQL = "SELECT * FROM cartas WHERE costo " + operador + " ? ORDER BY costo";
 
         try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement psElxIg = conn.prepareStatement(elixirIgualSQL)) {
+             PreparedStatement psEncElx = conn.prepareStatement(encontrarElixirSQL)) {
 
-            psElxIg.setInt(1, elixirIgualAEncontrar);
-            ResultSet rsElxIg = psElxIg.executeQuery();
+            psEncElx.setInt(1, elixirAEncontrar);
+            ResultSet rsEncElx = psEncElx.executeQuery();
 
-            while (rsElxIg.next()) {
+            while (rsEncElx.next()) {
 
                 Carta carta = new Carta(
-                        rsElxIg.getString("nombre"),
-                        rsElxIg.getInt("costo"),
-                        rsElxIg.getString("rareza"),
-                        rsElxIg.getString("tipo"));
+                        rsEncElx.getString("nombre"),
+                        rsEncElx.getInt("costo"),
+                        rsEncElx.getString("rareza"),
+                        rsEncElx.getString("tipo"));
 
-                carta.setId(rsElxIg.getInt("id"));
-                listaElixirIgual.add(carta);
+                carta.setId(rsEncElx.getInt("id"));
+                listaElixir.add(carta);
             } } catch (SQLException e) {
 
             System.out.println("Error: " + e.getMessage());
 
-        } return listaElixirIgual;
-    }
-
-
-    //Metodo para buscar por Elixir < X
-    public List<Carta> elixirMenor(int elixirMenorAEncontrar) {
-
-        List<Carta> listaElixirMenor = new ArrayList<>();
-        String elixirMenorSQL = "SELECT * FROM cartas WHERE costo < ?";
-
-        try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement psElxMen = conn.prepareStatement(elixirMenorSQL)) {
-
-            psElxMen.setInt(1, elixirMenorAEncontrar);
-            ResultSet rsElxMen = psElxMen.executeQuery();
-
-            while (rsElxMen.next()) {
-
-                Carta carta = new Carta(
-                        rsElxMen.getString("nombre"),
-                        rsElxMen.getInt("costo"),
-                        rsElxMen.getString("rareza"),
-                        rsElxMen.getString("tipo"));
-
-                carta.setId(rsElxMen.getInt("id"));
-                listaElixirMenor.add(carta);
-            } } catch (SQLException e) {
-
-            System.out.println("Error: " + e.getMessage());
-
-        } return listaElixirMenor;
-    }
-
-
-    //Metodo para buscar por Elixir > X
-    public List<Carta> elixirMayor(int elixirMayorAEncontrar) {
-
-        List<Carta> listaElixirMayor = new ArrayList<>();
-        String elixirMayorSQL = "SELECT * FROM cartas WHERE costo > ?";
-
-        try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement psElxMay = conn.prepareStatement(elixirMayorSQL)) {
-
-            psElxMay.setInt(1, elixirMayorAEncontrar);
-            ResultSet rsElxMay = psElxMay.executeQuery();
-
-            while (rsElxMay.next()) {
-
-                Carta carta = new Carta(
-                        rsElxMay.getString("nombre"),
-                        rsElxMay.getInt("costo"),
-                        rsElxMay.getString("rareza"),
-                        rsElxMay.getString("tipo"));
-
-                carta.setId(rsElxMay.getInt("id"));
-                listaElixirMayor.add(carta);
-            } } catch (SQLException e) {
-
-            System.out.println("Error: " + e.getMessage());
-
-        } return listaElixirMayor;
+        } return listaElixir;
     }
 
 

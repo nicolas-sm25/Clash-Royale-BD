@@ -26,7 +26,7 @@ public class Main {
 
                 case 1:
 
-                    System.out.println("Ingrese el nombre de la carta");
+                    System.out.println("\nIngrese el nombre de la carta");
                     String nombre = leer.nextLine();
 
                     System.out.println("Ingrese el costo de elixir");
@@ -69,11 +69,12 @@ public class Main {
 
                         case 1:
 
-                            System.out.print("Ingrese ID: ");
+                            System.out.print("\nIngrese ID: ");
                             int idAEncontrar = leer.nextInt();
                             leer.nextLine();
 
                             Carta cartaEncontrada = dao.buscarPorId(idAEncontrar);
+                            System.out.print("\n");
 
                             if (cartaEncontrada != null) {
 
@@ -81,23 +82,27 @@ public class Main {
 
                             } else {
 
-                                System.out.println("No existe carta con ese ID");
+                                System.out.println("\nNo existe carta con ese ID");
 
                             }
 
                             break;
 
+
                         case 2:
 
-                            System.out.print("Ingrese el nombre a buscar: ");
+                            System.out.print("\nIngrese el nombre a buscar: ");
                             String nombreABuscar = leer.nextLine();
+
                             List<Carta> nombresEncontrados = dao.buscarPorNombre(nombreABuscar);
 
                             if (nombresEncontrados.isEmpty()) {
 
-                                System.out.println("No se encontraron cartas");
+                                System.out.println("\nNo se encontraron cartas");
 
                             } else {
+
+                                System.out.print("\n");
 
                                 for (Carta nomEncAUX : nombresEncontrados) {
 
@@ -108,7 +113,7 @@ public class Main {
                             break;
 
                         default:
-                            System.out.println("Opción inválida");
+                            System.out.println("\nOpción inválida");
                     }
                     break;
 
@@ -127,87 +132,41 @@ public class Main {
 
                         case 1:
 
-                            System.out.println("1. Elixir = X");
-                            System.out.println("2. Elixir < X");
-                            System.out.println("3. Elixir > X");
-                            System.out.print("Opción: ");
+                            System.out.print("\nOperador (=, <, >, <=, >=): ");
+                            String operadorElx = leer.nextLine();
 
-                            int opElixir = leer.nextInt();
+                            if(!operadorElx.equals("=") && !operadorElx.equals("<") && !operadorElx.equals(">") && !operadorElx.equals("<=") && !operadorElx.equals(">=")){
+
+                                System.out.println("\nOperador inválido");
+
+                                break;
+                            }
+
+                            System.out.print("Elixir " + operadorElx + " ");
+                            int ElixirABuscar = leer.nextInt();
                             leer.nextLine();
 
-                            switch (opElixir) {
+                            List<Carta> elxEncontrado = dao.encontrarElixir(operadorElx, ElixirABuscar);
 
-                                case 1:
+                            if (elxEncontrado.isEmpty()) {
 
-                                    System.out.print("Elixir = ");
-                                    int ElixirIgual = leer.nextInt();
-                                    leer.nextLine();
+                                System.out.println("\nNo se encontraron cartas");
 
-                                    List<Carta> elixIgEncontrado = dao.elixirIgual(ElixirIgual);
+                            } else {
 
-                                    if (elixIgEncontrado.isEmpty()) {
+                                System.out.print("\n");
 
-                                        System.out.println("No se encontraron cartas");
+                                for (Carta elxIgEncAUX : elxEncontrado) {
 
-                                    } else {
+                                    System.out.println(elxIgEncAUX);
 
-                                        for (Carta elxIgEncAUX : elixIgEncontrado) {
+                                } }
 
-                                            System.out.println(elxIgEncAUX);
-
-                                        } }
-                                    break;
-
-                                case 2:
-
-                                    System.out.print("Elixir < ");
-                                    int ElixirMenor = leer.nextInt();
-                                    leer.nextLine();
-
-                                    List<Carta> elixMenEncontrado = dao.elixirMenor(ElixirMenor);
-
-                                    if (elixMenEncontrado.isEmpty()) {
-
-                                        System.out.println("No se encontraron cartas");
-
-                                    } else {
-
-                                        for (Carta elxIgEncAUX : elixMenEncontrado) {
-
-                                            System.out.println(elxIgEncAUX);
-
-                                        } }
-                                    break;
-
-
-                                case 3:
-
-                                    System.out.print("Elixir > ");
-                                    int ElixirMayor = leer.nextInt();
-                                    leer.nextLine();
-
-                                    List<Carta> elixMayEncontrado = dao.elixirMayor(ElixirMayor);
-
-                                    if (elixMayEncontrado.isEmpty()) {
-
-                                        System.out.println("No se encontraron cartas");
-
-                                    } else {
-
-                                        for (Carta elxIgEncAUX : elixMayEncontrado) {
-
-                                            System.out.println(elxIgEncAUX);
-
-                                        } }
-                                    break;
-
-                                default:
-                                    System.out.println("Opción inválida, intente de nuevo.");
-                            }
+                         break;
 
                         case 2:
 
-                            System.out.println("1. Común");
+                            System.out.println("\n1. Común");
                             System.out.println("2. Especial");
                             System.out.println("3. Épica");
                             System.out.println("4. Legendaria");
@@ -223,6 +182,8 @@ public class Main {
 
                                     List<Carta> rarezaComúnEncontrada = dao.encontrarRareza("Común");
 
+                                    System.out.print("\n");
+
                                         for (Carta raComEncAUX : rarezaComúnEncontrada) {
 
                                             System.out.println(raComEncAUX);
@@ -234,6 +195,8 @@ public class Main {
                                 case 2:
 
                                     List<Carta> rarezaEspecialEncontrada = dao.encontrarRareza("Especial");
+
+                                    System.out.print("\n");
 
                                     for (Carta raEspEncAUX : rarezaEspecialEncontrada) {
 
@@ -248,6 +211,8 @@ public class Main {
 
                                     List<Carta> rarezaEpicaEncontrada = dao.encontrarRareza("Épica");
 
+                                    System.out.print("\n");
+
                                     for (Carta raEpcEncAUX : rarezaEpicaEncontrada) {
 
                                         System.out.println(raEpcEncAUX);
@@ -261,6 +226,8 @@ public class Main {
 
                                     List<Carta> rarezaLegendariaEncontrada = dao.encontrarRareza("Legendaria");
 
+                                    System.out.print("\n");
+
                                     for (Carta raLegEncAUX : rarezaLegendariaEncontrada) {
 
                                         System.out.println(raLegEncAUX);
@@ -273,6 +240,8 @@ public class Main {
 
                                     List<Carta> rarezaCampeonEncontrada = dao.encontrarRareza("Campeón");
 
+                                    System.out.print("\n");
+
                                     for (Carta raCamEncAUX : rarezaCampeonEncontrada) {
 
                                         System.out.println(raCamEncAUX);
@@ -282,26 +251,26 @@ public class Main {
 
 
                                 default:
-                                    System.out.println("Opción inválida, intente de nuevo.");
+                                    System.out.println("\nOpción inválida, intente de nuevo.");
                             }
 
                                 break;
 
                         default:
-                            System.out.println("Opción inválida, intente de nuevo.");
+                            System.out.println("\nOpción inválida, intente de nuevo.");
                     }
 
 
                 break;
 
                 case 5:
-                    System.out.println("Bye bye");
+                    System.out.println("\nBye bye");
                     return;
 
 
 
                 default:
-                    System.out.println("Opción inválida, intente de nuevo.");
+                    System.out.println("\nOpción inválida, intente de nuevo.");
             }
         }
     }
