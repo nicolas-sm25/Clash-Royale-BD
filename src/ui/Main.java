@@ -6,7 +6,26 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    static void main(String[] args ) {
+
+
+    // Metodo para validar int
+    public static int validarInt(Scanner leer) {
+
+        while (!leer.hasNextInt()) {
+
+            System.out.println("Debe ingresar un número, intente de nuevo:");
+            leer.nextLine();
+
+        }
+
+        int numero = leer.nextInt();
+        leer.nextLine();
+
+        return numero;
+    }
+
+
+    static void main() {
         CartaDAO dao = new CartaDAO();
         Scanner leer =  new Scanner(System.in);
 
@@ -19,8 +38,7 @@ public class Main {
             System.out.println("5. Salir");
             System.out.print("Opción: ");
 
-            int opPrinc = leer.nextInt();
-            leer.nextLine();
+            int opPrinc = validarInt(leer);
 
             switch (opPrinc) {
 
@@ -35,10 +53,7 @@ public class Main {
 
                     while (true) {
 
-                        if (leer.hasNextInt()) {
-
-                            elixir = leer.nextInt();
-                            leer.nextLine();
+                            elixir = validarInt(leer);
 
                             if (elixir >= 0 && elixir <= 10) {
 
@@ -48,13 +63,7 @@ public class Main {
 
                                 System.out.println("Elixir inválido, intente de nuevo: ");
 
-                            }
-
-                        } else {
-
-                            System.out.println("Debe ingresar un número, intente de nuevo: ");
-                            leer.nextLine();
-                    } }
+                            } }
 
                     System.out.println("Ingrese la rareza (Común, Especial, Épica, Legendaria, Campeón):");
 
@@ -71,10 +80,7 @@ public class Main {
                         } else {
 
                             break;
-                        }
-
-                    }
-
+                        } }
 
                     System.out.println("Ingrese el tipo (Tropa, Estructura, Hechizo, Tropa de torre):");
 
@@ -91,9 +97,7 @@ public class Main {
                         } else {
 
                             break;
-                        }
-
-                    }
+                        } }
 
                     if ( elixir == 0 && !tipo.equals("Tropa de torre")) {
 
@@ -130,8 +134,7 @@ public class Main {
                     System.out.println("2. Nombre");
                     System.out.print("Opción: ");
 
-                    int opBuscar = leer.nextInt();
-                    leer.nextLine();
+                    int opBuscar = validarInt(leer);
 
                     switch (opBuscar) {
 
@@ -193,8 +196,7 @@ public class Main {
                     System.out.println("3. Tipo");
                     System.out.print("Opción: ");
 
-                    int opFiltrar = leer.nextInt();
-                    leer.nextLine();
+                    int opFiltrar = validarInt(leer);
 
                     switch (opFiltrar) {
 
@@ -211,8 +213,7 @@ public class Main {
                             }
 
                             System.out.print("Elixir " + operadorElx + " ");
-                            int ElixirABuscar = leer.nextInt();
-                            leer.nextLine();
+                            int ElixirABuscar = validarInt(leer);
 
                             List<Carta> elxEncontrado = dao.encontrarElixir(operadorElx, ElixirABuscar);
 
@@ -241,8 +242,7 @@ public class Main {
                             System.out.println("5. Campeón");
                             System.out.print("Opción: ");
 
-                            int opRareza = leer.nextInt();
-                            leer.nextLine();
+                            int opRareza = validarInt(leer);
 
                             switch (opRareza) {
 
@@ -257,6 +257,7 @@ public class Main {
                                             System.out.println(raComEncAUX);
 
                                         }
+
                                     break;
 
 
@@ -271,9 +272,8 @@ public class Main {
                                         System.out.println(raEspEncAUX);
 
                                     }
+
                                     break;
-
-
 
                                 case 3:
 
@@ -286,9 +286,8 @@ public class Main {
                                         System.out.println(raEpcEncAUX);
 
                                     }
+
                                     break;
-
-
 
                                 case 4:
 
@@ -301,8 +300,8 @@ public class Main {
                                         System.out.println(raLegEncAUX);
 
                                     }
-                                    break;
 
+                                    break;
 
                                 case 5:
 
@@ -315,11 +314,13 @@ public class Main {
                                         System.out.println(raCamEncAUX);
 
                                     }
+
                                     break;
 
-
                                 default:
+
                                     System.out.println("\nOpción inválida, intente de nuevo.");
+
                             }
 
                                 break;
@@ -332,8 +333,7 @@ public class Main {
                             System.out.println("4. Tropa de torre");
                             System.out.print("Opción: ");
 
-                            int opTipo = leer.nextInt();
-                            leer.nextLine();
+                            int opTipo = validarInt(leer);
 
                             switch (opTipo) {
 
@@ -351,7 +351,6 @@ public class Main {
 
                                     break;
 
-
                                 case 2:
 
                                     List<Carta> tipoEstructuraEncontrada = dao.encontrarTipo("Estructura");
@@ -365,8 +364,6 @@ public class Main {
                                     }
 
                                     break;
-
-
 
                                 case 3:
 
@@ -382,8 +379,6 @@ public class Main {
 
                                     break;
 
-
-
                                 case 4:
 
                                     List<Carta> tipoTroTorreEncontrada = dao.encontrarTipo("Tropa de torre");
@@ -398,17 +393,19 @@ public class Main {
 
                                     break;
 
-
-
                                 default:
+
                                     System.out.println("\nOpción inválida, intente de nuevo.");
+
                             }
 
                             break;
 
 
                         default:
+
                             System.out.println("\nOpción inválida, intente de nuevo.");
+
                     }
 
                     break;
@@ -421,7 +418,9 @@ public class Main {
 
 
                 default:
+
                     System.out.println("\nOpción inválida, intente de nuevo.");
+
             }
         }
     }
