@@ -22,10 +22,10 @@ public class CartaDAO {
             psAggCarta.setString(4, carta.getTipo());
             psAggCarta.executeUpdate();
 
-            System.out.println("Carta adicionada correctamente");
+            System.out.println("\nCarta adicionada correctamente");
 
         } catch (SQLException error) {
-            System.err.println("Error: " + error.getMessage());
+            System.err.println("\nError: " + error.getMessage());
         }}
 
 
@@ -52,7 +52,7 @@ public class CartaDAO {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("\nError: " + e.getMessage());
         } return listaCartas;
     }
 
@@ -81,7 +81,7 @@ public class CartaDAO {
 
         } catch (SQLException e) {
 
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("\nError: " + e.getMessage());
         } return null;
     }
 
@@ -111,7 +111,7 @@ public class CartaDAO {
                 listaCartasConNombre.add(carta);
             } } catch (SQLException e) {
 
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("\nError: " + e.getMessage());
         } return listaCartasConNombre;
     }
 
@@ -140,7 +140,7 @@ public class CartaDAO {
                 listaElixir.add(carta);
             } } catch (SQLException e) {
 
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("\nError: " + e.getMessage());
 
         } return listaElixir;
     }
@@ -170,7 +170,7 @@ public class CartaDAO {
                 listaRareza.add(carta);
             } } catch (SQLException e) {
 
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("\nError: " + e.getMessage());
 
         } return listaRareza;
     }
@@ -200,7 +200,7 @@ public class CartaDAO {
                 listaTipo.add(carta);
             } } catch (SQLException e) {
 
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("\nError: " + e.getMessage());
 
         } return listaTipo;
     }

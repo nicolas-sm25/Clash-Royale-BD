@@ -29,18 +29,86 @@ public class Main {
                     System.out.println("\nIngrese el nombre de la carta");
                     String nombre = leer.nextLine();
 
-                    System.out.println("Ingrese el costo de elixir");
-                    int elixir = leer.nextInt();
-                    leer.nextLine();
+                    System.out.println("Ingrese el costo de elixir (entre 0 y 10, 0 exclusivamente para las Tropas de torre):");
 
-                    System.out.println("Ingrese la rareza");
-                    String rareza = leer.nextLine();
+                    int elixir;
 
-                    System.out.println("Ingrese el tipo");
-                    String tipo = leer.nextLine();
+                    while (true) {
 
-                    Carta carta = new Carta(nombre, elixir, rareza, tipo);
-                    dao.agregarCarta(carta);
+                        if (leer.hasNextInt()) {
+
+                            elixir = leer.nextInt();
+                            leer.nextLine();
+
+                            if (elixir >= 0 && elixir <= 10) {
+
+                                break;
+
+                            } else {
+
+                                System.out.println("Elixir inválido, intente de nuevo: ");
+
+                            }
+
+                        } else {
+
+                            System.out.println("Debe ingresar un número, intente de nuevo: ");
+                            leer.nextLine();
+                    } }
+
+                    System.out.println("Ingrese la rareza (Común, Especial, Épica, Legendaria, Campeón):");
+
+                    String rareza;
+
+                    while (true) {
+
+                        rareza = leer.nextLine();
+
+                        if (!rareza.equals("Común") && !rareza.equals("Especial") && !rareza.equals("Épica") && !rareza.equals("Legendaria") && !rareza.equals("Campeón")) {
+
+                            System.out.println("Rareza inválida, intente de nuevo: ");
+
+                        } else {
+
+                            break;
+                        }
+
+                    }
+
+
+                    System.out.println("Ingrese el tipo (Tropa, Estructura, Hechizo, Tropa de torre):");
+
+                    String tipo;
+
+                    while (true) {
+
+                        tipo = leer.nextLine();
+
+                        if (!tipo.equals("Tropa") && !tipo.equals("Estructura") && !tipo.equals("Hechizo") && !tipo.equals("Tropa de torre")) {
+
+                            System.out.println("Tipo inválido, intente de nuevo: ");
+
+                        } else {
+
+                            break;
+                        }
+
+                    }
+
+                    if ( elixir == 0 && !tipo.equals("Tropa de torre")) {
+
+                        System.out.println("\nSolo las Tropas de torre pueden tener un costo de elixir de 0");
+
+                    } else if (elixir != 0 && tipo.equals("Tropa de torre")){
+
+                        System.out.println("\nLas Tropas de torre no pueden tener un costo de elixir distinto a 0");
+
+                    } else {
+
+                        Carta carta = new Carta(nombre, elixir, rareza, tipo);
+                        dao.agregarCarta(carta);
+
+                    }
 
                     break;
 
@@ -180,11 +248,11 @@ public class Main {
 
                                 case 1:
 
-                                    List<Carta> rarezaComúnEncontrada = dao.encontrarRareza("Común");
+                                    List<Carta> rarezaComunEncontrada = dao.encontrarRareza("Común");
 
                                     System.out.print("\n");
 
-                                        for (Carta raComEncAUX : rarezaComúnEncontrada) {
+                                        for (Carta raComEncAUX : rarezaComunEncontrada) {
 
                                             System.out.println(raComEncAUX);
 
