@@ -30,6 +30,7 @@ public class Main {
         CartaDAO dao = new CartaDAO();
         Scanner leer =  new Scanner(System.in);
 
+        //Menú infinito
         while (true) {
 
             System.out.println("\n===== BASE DE DATOS CARTAS DE CLASH ROYALE =====");
@@ -46,8 +47,26 @@ public class Main {
 
                 case 1:
 
-                    System.out.println("\nIngrese el nombre de la carta:");
-                    String nombre = leer.nextLine();
+                    //Enviar carta a la BD
+                        //Toma datos del usuario
+
+                    String nombre;
+
+                    while(true){
+
+                        System.out.println("\nIngrese el nombre de la carta:");
+                        nombre = leer.nextLine();
+
+                        if(nombre.isBlank()){
+
+                            System.out.print("\nEl nombre no puede estar vacío, intente de nuevo");
+
+                        } else {
+
+                            break;
+
+                        }
+                    }
 
                     System.out.println("Ingrese el costo de elixir (entre 0 y 10, 0 exclusivamente para las Tropas de torre):");
 
@@ -119,6 +138,8 @@ public class Main {
 
                         while(true){
 
+                            //Crea objeto Carta y lo envia a la BD
+
                             System.out.println("\nCarta:");
                             System.out.println(carta.toString());
                             System.out.println("(La ID se asigna automáticamente)");
@@ -163,6 +184,8 @@ public class Main {
 
                 case 2:
 
+                    //Mostrar toda la BD
+
                     System.out.println("\nCargando...");
 
                     List<Carta> listaCartas = dao.listaCartas();
@@ -179,6 +202,8 @@ public class Main {
 
                 case 3:
 
+                    //Buscar una carta
+
                     while(true) {
 
                         System.out.println("\nBuscar carta por:");
@@ -192,6 +217,8 @@ public class Main {
                         switch (opBuscar) {
 
                             case 1:
+
+                                //Buscar una carta por ID
 
                                 int idAEncontrar;
 
@@ -230,6 +257,8 @@ public class Main {
                             break;
 
                             case 2:
+
+                                //Buscar una carta por nombre
 
                                 System.out.print("\nIngrese el nombre a buscar: ");
                                 String nombreABuscar = leer.nextLine();
@@ -278,6 +307,8 @@ public class Main {
 
                 case 4:
 
+                    //Filtros
+
                     while(true) {
 
                         System.out.println("\nFiltrar por:");
@@ -292,6 +323,8 @@ public class Main {
                         switch (opFiltrar) {
 
                             case 1:
+
+                                //Filtrar por elixir
 
                                 String operadorElx;
 
@@ -356,6 +389,8 @@ public class Main {
 
                             case 2:
 
+                                //Filtrar por rareza
+
                                 while (true) {
 
                                     System.out.println("\n1. Común");
@@ -371,6 +406,8 @@ public class Main {
                                     switch (opRareza) {
 
                                         case 1:
+
+                                            //Filtrar por rareza común
 
                                             System.out.println("\nCargando...");
 
@@ -388,6 +425,8 @@ public class Main {
 
                                         case 2:
 
+                                            //Filtrar por rareza especial
+
                                             System.out.println("\nCargando...");
 
                                             List<Carta> rarezaEspecialEncontrada = dao.encontrarRareza("Especial");
@@ -402,6 +441,8 @@ public class Main {
                                         break;
 
                                         case 3:
+
+                                            //Filtrar por rareza épica
 
                                             System.out.println("\nCargando...");
 
@@ -419,6 +460,8 @@ public class Main {
 
                                         case 4:
 
+                                            //Filtrar por rareza legendaria
+
                                             System.out.println("\nCargando...");
 
                                             List<Carta> rarezaLegendariaEncontrada = dao.encontrarRareza("Legendaria");
@@ -434,6 +477,8 @@ public class Main {
                                         break;
 
                                         case 5:
+
+                                            //Filtrar por rareza campeón
 
                                             System.out.println("\nCargando...");
 
@@ -476,6 +521,9 @@ public class Main {
 
                                 while (true) {
 
+                                    //Filtrar por tipo
+
+
                                     System.out.println("\n1. Tropa");
                                     System.out.println("2. Estructura");
                                     System.out.println("3. Hechizo");
@@ -488,6 +536,8 @@ public class Main {
                                     switch (opTipo) {
 
                                         case 1:
+
+                                            //Filtrar por tipo tropa
 
                                             System.out.println("\nCargando...");
 
@@ -505,6 +555,8 @@ public class Main {
 
                                         case 2:
 
+                                            //Filtrar por tipo estructura
+
                                             System.out.println("\nCargando...");
 
                                             List<Carta> tipoEstructuraEncontrada = dao.encontrarTipo("Estructura");
@@ -521,6 +573,8 @@ public class Main {
 
                                         case 3:
 
+                                            //Filtrar por tipo hechizo
+
                                             System.out.println("\nCargando...");
 
                                             List<Carta> tipoHechizoEncontrada = dao.encontrarTipo("Hechizo");
@@ -536,6 +590,8 @@ public class Main {
                                         break;
 
                                         case 4:
+
+                                            //Filtrar por tipo tropa de torre
 
                                             System.out.println("\nCargando...");
 
