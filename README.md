@@ -135,7 +135,48 @@ private static final String PASS = "...";
 
 ---
 
+
+
+
+
+## Diagrama UML
+
+```mermaid
+classDiagram
+
+class Main{
+  +validarInt()
+  +main()
+}
+
+class Carta{
+  -int id
+  -String nombre
+  -int elixir
+  -String rareza
+  -String tipo
+  +toString()
+}
+
+class CartaDAO{
+  +agregarCarta()
+  +listaCartas()
+  +buscarPorId()
+  +buscarPorNombre()
+  +encontrarElixir()
+  +encontrarRareza()
+  +encontrarTipo()
+}
+
+class ConexionDB{
+  +getConnection()
+}
+
+Main --> CartaDAO : usa
+CartaDAO --> ConexionDB : conexión
+CartaDAO --> Carta : crea objetos
+```
 # Autor
 
-Nicolás Soriano Medina  
+Nicolás Soriano Medina  20251020110  
 Universidad Distrital Francisco José de Caldas
