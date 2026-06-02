@@ -14,6 +14,8 @@ public class VentanaPrincipal extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        add(new PanelCartas());
+
         setVisible(true);
     }
 }
