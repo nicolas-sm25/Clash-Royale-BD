@@ -54,4 +54,32 @@ public class CreadorComponentes {
 
         return comboBox;
     }
+
+    //Crear textFields
+
+    public static JTextField crearTextField(int x, int y, int width, int height, Font fuente) {
+
+        JTextField textField = new JTextField();
+
+        textField.setBounds(x, y, width, height);
+        textField.setFont(fuente);
+
+        return textField;
+    }
+
+    //Crear tablas con scroll
+
+    public static JScrollPane crearTabla(int x, int y, int width, int height, int row, Font fuenteTitulo, Font fuenteTexto) {
+
+        JTable tabla = new JTable();
+
+        tabla.setRowHeight(row);
+        tabla.getTableHeader().setFont(fuenteTitulo);
+        tabla.setFont(fuenteTexto);
+
+        JScrollPane scroll = new JScrollPane(tabla);
+        scroll.setBounds(x, y, width, height);
+
+        return scroll;
+    }
 }
