@@ -15,11 +15,7 @@ public class VntMostrar {
     public VntMostrar(){
 
         JFrame ventanaMostrar = CreadorComponentes.crearVentana("Mostrar toda la BD");
-
         ventanaMostrar.setLayout(null);
-
-        JLabel labelCargando = CreadorComponentes.crearLabel("Cargando...", 450, 350, 400, 35, new Font("Arial", Font.ITALIC, 20));
-        ventanaMostrar.add(labelCargando);
 
         JButton btnExport = CreadorComponentes.crearBoton("Exportar a .txt", 350, 500, 150, 40, new Font("Arial", Font.BOLD, 14));
         ventanaMostrar.add(btnExport);
@@ -47,18 +43,14 @@ public class VntMostrar {
             datosCartas[i][4] = carta.getTipo();
         }
 
-        JTable tablaCartas = new JTable(datosCartas,columnasTabla);
-        tablaCartas.setRowHeight(25);
-        tablaCartas.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
-        tablaCartas.setFont(new Font("Arial", Font.PLAIN, 13));
+        JScrollPane tablaCartas = CreadorComponentes.crearTabla(datosCartas,columnasTabla, 50, 70, 900, 400, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
+        ventanaMostrar.add(tablaCartas);
 
-        JScrollPane scroll = new JScrollPane(tablaCartas);
-        scroll.setBounds(50,70,900,400);
-        ventanaMostrar.add(scroll);
+        btnExport.addActionListener(aeBtnExport -> {
 
-        labelCargando.setVisible(false);
+            //Despues lo agrego xdd
 
-
+        });
 
 
         btnVolver.addActionListener(aeBtnVolver -> {

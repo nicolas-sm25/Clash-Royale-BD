@@ -14,7 +14,6 @@ public class VntInsertar {
     public VntInsertar(){
 
         JFrame ventanaInsert = CreadorComponentes.crearVentana("Insertar una carta");
-
         ventanaInsert.setLayout(null);
 
         JButton btnInsCarta = CreadorComponentes.crearBoton("Insertar carta", 300, 500, 200, 40, new Font("Arial", Font.BOLD, 14));
@@ -27,10 +26,8 @@ public class VntInsertar {
         JLabel labelNombreCarta = CreadorComponentes.crearLabel("Nombre de la carta:", 50, 30, 300, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaInsert.add(labelNombreCarta);
 
-        JTextField nombreCarta = new JTextField();
-        nombreCarta.setBounds(50, 70, 300, 35);
-        nombreCarta.setFont(new Font("Arial", Font.PLAIN, 20));
-        ventanaInsert.add(nombreCarta);
+        JTextField textFieldNombreCarta = CreadorComponentes.crearTextField(50, 70, 300, 35, new Font("Arial", Font.PLAIN, 20));
+        ventanaInsert.add(textFieldNombreCarta);
 
         JLabel labelElixir = CreadorComponentes.crearLabel("Costo de elixir:", 50, 200, 300, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaInsert.add(labelElixir);
@@ -58,10 +55,6 @@ public class VntInsertar {
         labelInval.setVisible(false);
         ventanaInsert.add(labelInval);
 
-        JLabel labelCargando = CreadorComponentes.crearLabel("Cargando...", 350, 450, 400, 35, new Font("Arial", Font.ITALIC, 20));
-        labelCargando.setVisible(false);
-        ventanaInsert.add(labelCargando);
-
         JLabel labelCartaAgg = CreadorComponentes.crearLabel("Carta agregada correctamente", 350, 450, 400, 35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
         labelCartaAgg.setForeground(Color.GREEN);
         labelCartaAgg.setVisible(false);
@@ -78,7 +71,7 @@ public class VntInsertar {
             labelCartaAgg.setVisible(false);
             labelError.setVisible(false);
 
-            if(nombreCarta.getText().isBlank() || menuElixir.getSelectedIndex() == 0 || menuRareza.getSelectedIndex() == 0 || menuTipos.getSelectedIndex() == 0){
+            if(textFieldNombreCarta.getText().isBlank() || menuElixir.getSelectedIndex() == 0 || menuRareza.getSelectedIndex() == 0 || menuTipos.getSelectedIndex() == 0){
 
                 labelInval.setText("Datos invalidos, intente de nuevo");
                 labelInval.setBounds(350, 450, 400, 35);
@@ -98,7 +91,7 @@ public class VntInsertar {
 
             } else {
 
-                String nombre = nombreCarta.getText();
+                String nombre = textFieldNombreCarta.getText();
                 int elixir = 0;
 
                 if(menuElixir.getSelectedIndex() != 11){
@@ -108,23 +101,20 @@ public class VntInsertar {
                 String rareza = (String) menuRareza.getSelectedItem();
                 String tipo = (String) menuTipos.getSelectedItem();
 
-                labelCargando.setVisible(true);
 
                 Carta carta = new Carta(nombre, elixir, rareza, tipo);
                 dao.agregarCarta(carta);
 
-                labelCargando.setVisible(false);
                 labelCartaAgg.setVisible(dao.getAccionCompletada());
                 labelError.setVisible(!dao.getAccionCompletada());
 
-                nombreCarta.setText("");
+                textFieldNombreCarta.setText("");
                 menuElixir.setSelectedIndex(0);
                 menuRareza.setSelectedIndex(0);
                 menuTipos.setSelectedIndex(0);
 
             }
         });
-
 
         btnVolver.addActionListener(aeBtnVolver -> {
 

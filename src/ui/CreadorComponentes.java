@@ -69,9 +69,9 @@ public class CreadorComponentes {
 
     //Crear tablas con scroll
 
-    public static JScrollPane crearTabla(int x, int y, int width, int height, int row, Font fuenteTitulo, Font fuenteTexto) {
+    public static JScrollPane crearTabla(Object[][] datos, String[] columnas, int x, int y, int width, int height, int row, Font fuenteTitulo, Font fuenteTexto) {
 
-        JTable tabla = new JTable();
+        JTable tabla = new JTable(datos, columnas);
 
         tabla.setRowHeight(row);
         tabla.getTableHeader().setFont(fuenteTitulo);
