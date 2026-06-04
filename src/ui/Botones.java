@@ -45,5 +45,24 @@ public class Botones extends JPanel {
 
         });
 
+        //Boton mostrar
+
+        btnMostrar.addActionListener(aeBtnMostrar -> {
+
+            new VntMostrar();
+
+        });
+
+
+
+
+        //Boton salir
+
+        btnSalir.addActionListener(aeBtnSalir -> {
+
+            System.exit(0);
+
+        });
+
     }
 }

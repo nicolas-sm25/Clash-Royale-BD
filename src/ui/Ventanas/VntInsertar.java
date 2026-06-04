@@ -20,8 +20,8 @@ public class VntInsertar {
         JButton btnInsCarta = CreadorComponentes.crearBoton("Insertar carta", 300, 500, 200, 40, new Font("Arial", Font.BOLD, 14));
         ventanaInsert.add(btnInsCarta);
 
-        JButton btnCancelInsCarta = CreadorComponentes.crearBoton("Volver", 600, 500, 100, 40, new Font("Arial", Font.BOLD, 14));
-        ventanaInsert.add(btnCancelInsCarta);
+        JButton btnVolver = CreadorComponentes.crearBoton("Volver", 600, 500, 100, 40, new Font("Arial", Font.BOLD, 14));
+        ventanaInsert.add(btnVolver);
 
 
         JLabel labelNombreCarta = CreadorComponentes.crearLabel("Nombre de la carta:", 50, 30, 300, 35, new Font("Arial", Font.PLAIN, 20));
@@ -126,7 +126,7 @@ public class VntInsertar {
         });
 
 
-        btnCancelInsCarta.addActionListener(aeBtnCancelInsCarta -> {
+        btnVolver.addActionListener(aeBtnVolver -> {
 
             ventanaInsert.dispose();
 
