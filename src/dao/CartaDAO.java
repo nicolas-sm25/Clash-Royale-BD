@@ -8,6 +8,8 @@ import java.util.List;
 
 public class CartaDAO {
 
+    boolean accionCompletada;
+
     //Metodo para agregar una carta a la BD
     public void agregarCarta(Carta carta){
 
@@ -22,11 +24,12 @@ public class CartaDAO {
             psAggCarta.setString(4, carta.getTipo());
             psAggCarta.executeUpdate();
 
-            System.out.println("\nCarta adicionada correctamente");
+            accionCompletada = true;
 
         } catch (SQLException error) {
-            System.err.println("\nError: " + error.getMessage());
-        }}
+            accionCompletada = false;
+        }
+    }
 
 
     //Metodo para mostrar la tabla completa
@@ -203,6 +206,12 @@ public class CartaDAO {
             System.out.println("\nError: " + e.getMessage());
 
         } return listaTipo;
+    }
+
+    public boolean getAccionCompletada() {
+
+        return accionCompletada;
+
     }
 }
 
