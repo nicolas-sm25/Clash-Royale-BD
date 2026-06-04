@@ -42,24 +42,18 @@ public class Botones extends JPanel {
 
         btnInsertar.addActionListener(aeBtnInsertar -> {
 
-            JFrame ventanaInsert = CreadorVentanas.creadorVentanas("Insertar una carta");
+            JFrame ventanaInsert = CreadorComponentes.crearVentana("Insertar una carta");
 
             ventanaInsert.setLayout(null);
 
-            JButton btnInsCarta = new JButton("Insertar carta");
-            btnInsCarta.setBounds(300, 500, 200, 40);
-            btnInsCarta.setFont(new Font("Arial", Font.BOLD, 14));
+            JButton btnInsCarta = CreadorComponentes.crearBoton("Insertar carta", 300, 500, 200, 40, new Font("Arial", Font.BOLD, 14));
             ventanaInsert.add(btnInsCarta);
 
-            JButton btnCancelInsCarta = new JButton("Volver");
-            btnCancelInsCarta.setBounds(600, 500, 100, 40);
-            btnCancelInsCarta.setFont(new Font("Arial", Font.BOLD, 14));
+            JButton btnCancelInsCarta = CreadorComponentes.crearBoton("Volver", 600, 500, 100, 40, new Font("Arial", Font.BOLD, 14));
             ventanaInsert.add(btnCancelInsCarta);
 
 
-            JLabel labelNombreCarta = new JLabel("Nombre de la carta:");
-            labelNombreCarta.setFont(new Font("Arial", Font.PLAIN, 20));
-            labelNombreCarta.setBounds(50, 30, 300, 35);
+            JLabel labelNombreCarta = CreadorComponentes.crearLabel("Nombre de la carta:", 50, 30, 300, 35, new Font("Arial", Font.PLAIN, 20));
             ventanaInsert.add(labelNombreCarta);
 
             JTextField nombreCarta = new JTextField();
@@ -67,78 +61,53 @@ public class Botones extends JPanel {
             nombreCarta.setFont(new Font("Arial", Font.PLAIN, 20));
             ventanaInsert.add(nombreCarta);
 
-            JLabel labelElixir = new JLabel("Costo de elixir:");
-            labelElixir.setFont(new Font("Arial", Font.PLAIN, 20));
-            labelElixir.setBounds(50, 200, 300, 35);
+            JLabel labelElixir = CreadorComponentes.crearLabel("Costo de elixir:", 50, 200, 300, 35, new Font("Arial", Font.PLAIN, 20));
             ventanaInsert.add(labelElixir);
 
             String[] costos = {"Selecciona una opción...", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "0 (Solo tropas de torre)"};
-            JComboBox<String> menuElixir = new JComboBox<>(costos);
-
-            menuElixir.setBounds(50, 240, 300, 35);
-            menuElixir.setFont(new Font("Arial", Font.PLAIN, 14));
+            JComboBox<String> menuElixir = CreadorComponentes.crearComboBox(costos, 50, 240, 300, 35, new Font("Arial", Font.PLAIN, 14));
             ventanaInsert.add(menuElixir);
 
-            JLabel labelRareza = new JLabel("Rareza:");
-            labelRareza.setFont(new Font("Arial", Font.PLAIN, 20));
-            labelRareza.setBounds(600, 30, 300, 35);
+            JLabel labelRareza = CreadorComponentes.crearLabel("Rareza:", 600, 30, 300, 35, new Font("Arial", Font.PLAIN, 20));
             ventanaInsert.add(labelRareza);
 
             String[] rarezas = {"Selecciona una opción...", "Común", "Especial", "Épica", "Legendaria", "Campeón"};
-            JComboBox<String> menuRareza = new JComboBox<>(rarezas);
-
-            menuRareza.setBounds(600, 70, 300, 35);
-            menuRareza.setFont(new Font("Arial", Font.PLAIN, 14));
+            JComboBox<String> menuRareza = CreadorComponentes.crearComboBox(rarezas, 600, 70, 300, 35, new Font("Arial", Font.PLAIN, 14));
             ventanaInsert.add(menuRareza);
 
-            JLabel labelTipo = new JLabel("Tipo:");
-            labelTipo.setFont(new Font("Arial", Font.PLAIN, 20));
-            labelTipo.setBounds(600, 200, 300, 35);
+            JLabel labelTipo = CreadorComponentes.crearLabel("Tipo:", 600, 200, 300, 35, new Font("Arial", Font.PLAIN, 20));
             ventanaInsert.add(labelTipo);
 
             String[] tipos = {"Selecciona una opción...", "Tropa", "Estructura", "Hechizo", "Tropa de torre"};
-            JComboBox<String> menuTipos = new JComboBox<>(tipos);
+            JComboBox<String> menuTipos = CreadorComponentes.crearComboBox(tipos, 600, 240, 300, 35, new Font("Arial", Font.PLAIN, 14));
+            ventanaInsert.add(menuTipos);
 
-            JLabel labelInval = new JLabel("");
-            labelInval.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+            JLabel labelInval = CreadorComponentes.crearLabel("", 350, 450, 400, 35, new Font("Arial", Font.PLAIN | Font.ITALIC, 20));
             labelInval.setForeground(Color.RED);
-            labelInval.setBounds(350, 450, 400, 35);
             labelInval.setVisible(false);
             ventanaInsert.add(labelInval);
 
-            JLabel labelCargando = new JLabel("Cargando...");
-            labelCargando.setFont(new Font("Arial", Font.ITALIC, 20));
-            labelCargando.setBounds(350, 450, 400, 35);
+            JLabel labelCargando = CreadorComponentes.crearLabel("Cargando...", 350, 450, 400, 35, new Font("Arial", Font.ITALIC, 20));
             labelCargando.setVisible(false);
             ventanaInsert.add(labelCargando);
 
-            JLabel labelCartaAgg = new JLabel("Carta agregada correctamente");
-            labelCartaAgg.setFont(new Font("Arial", Font.BOLD |Font.ITALIC, 20));
-            labelCartaAgg.setBounds(350, 450, 400, 35);
+            JLabel labelCartaAgg = CreadorComponentes.crearLabel("Carta agregada correctamente", 350, 450, 400, 35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
             labelCartaAgg.setForeground(Color.GREEN);
             labelCartaAgg.setVisible(false);
             ventanaInsert.add(labelCartaAgg);
 
-            JLabel labelError = new JLabel("Error al agregar la carta");
-            labelError.setFont(new Font("Arial", Font.BOLD |Font.ITALIC, 20));
-            labelError.setBounds(350, 450, 400, 35);
+            JLabel labelError = CreadorComponentes.crearLabel("Error al agregar carta", 350, 450, 400, 35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
             labelError.setForeground(Color.RED);
             labelError.setVisible(false);
             ventanaInsert.add(labelError);
 
-            menuTipos.setBounds(600, 240, 300, 35);
-            menuTipos.setFont(new Font("Arial", Font.PLAIN, 14));
-            ventanaInsert.add(menuTipos);
-
             btnInsCarta.addActionListener(aeBtnInsCarta -> {
-
-                String nombre = nombreCarta.getText();
 
                 labelInval.setVisible(false);
                 labelCartaAgg.setVisible(false);
                 labelError.setVisible(false);
 
-                if(nombre.isBlank() || menuElixir.getSelectedIndex() == 0 || menuRareza.getSelectedIndex() == 0 || menuTipos.getSelectedIndex() == 0){
+                if(nombreCarta.getText().isBlank() || menuElixir.getSelectedIndex() == 0 || menuRareza.getSelectedIndex() == 0 || menuTipos.getSelectedIndex() == 0){
 
                     labelInval.setText("Datos invalidos, intente de nuevo");
                     labelInval.setBounds(350, 450, 400, 35);
@@ -158,6 +127,7 @@ public class Botones extends JPanel {
 
                 } else {
 
+                    String nombre = nombreCarta.getText();
                     int elixir = 0;
 
                     if(menuElixir.getSelectedIndex() != 11){

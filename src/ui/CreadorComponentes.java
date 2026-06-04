@@ -1,0 +1,57 @@
+package ui;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class CreadorComponentes {
+
+    //Crear ventanas
+
+    public static JFrame crearVentana(String titulo) {
+
+        JFrame ventana = new JFrame();
+
+        ventana.setTitle(titulo);
+        ventana.setSize(1000,600);
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ventana.setVisible(true);
+
+        return ventana;
+    }
+
+    //Crear botones
+
+    public static JButton crearBoton(String nombre, int x, int y, int width, int height, Font fuente) {
+
+        JButton boton = new JButton(nombre);
+
+        boton.setBounds(x, y, width, height);
+        boton.setFont(fuente);
+
+        return boton;
+    }
+
+    //Crear labels
+
+    public static JLabel crearLabel(String nombre, int x, int y, int width, int height, Font fuente) {
+
+        JLabel label = new JLabel(nombre);
+
+        label.setBounds(x, y, width, height);
+        label.setFont(fuente);
+
+        return label;
+    }
+
+    //Crear comboBox
+
+    public static JComboBox<String> crearComboBox(String[] datos, int x, int y, int width, int height, Font fuente) {
+
+        JComboBox<String> comboBox = new JComboBox<>(datos);
+
+        comboBox.setBounds(x, y, width, height);
+        comboBox.setFont(fuente);
+
+        return comboBox;
+    }
+}
