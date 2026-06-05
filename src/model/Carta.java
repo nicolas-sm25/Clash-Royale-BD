@@ -67,4 +67,3 @@ public class Carta{
         return "| Id = " + id + " | Nombre = " + nombre + " | Rareza = " + rareza + " | Elixir = " + elixir + " | Tipo = " + tipo + " |";
     }
 }
-
