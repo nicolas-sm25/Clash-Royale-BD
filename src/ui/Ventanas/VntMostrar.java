@@ -21,22 +21,25 @@ public class VntMostrar {
         JFrame ventanaMostrar = CreadorComponentes.crearVentana("Mostrar toda la BD");
         ventanaMostrar.setLayout(null);
 
-        JButton btnExport = CreadorComponentes.crearBoton("Exportar a .txt", 350, 500, 150, 40, new Font("Arial", Font.BOLD, 14));
+        JButton btnExport = CreadorComponentes.crearBoton("Exportar a .txt", 320, 510, 160, 40, new Font("Arial", Font.BOLD, 14));
         ventanaMostrar.add(btnExport);
 
-        JButton btnVolver = CreadorComponentes.crearBoton("Volver", 600, 500, 100, 40, new Font("Arial", Font.BOLD, 14));
+        JButton btnVolver = CreadorComponentes.crearBoton("Volver", 530, 510, 160, 40, new Font("Arial", Font.BOLD, 14));
         ventanaMostrar.add(btnVolver);
 
-        JLabel labelTitulo = CreadorComponentes.crearLabel("BD CARTAS", 450, 30, 300, 35, new Font("Arial", Font.BOLD, 24));
+        JLabel labelTitulo = CreadorComponentes.crearLabel("BASE DE DATOS DE CARTAS", 250, 30, 500, 40, new Font("Arial", Font.BOLD, 28));
+        labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         ventanaMostrar.add(labelTitulo);
 
-        JLabel labelInval = CreadorComponentes.crearLabel("", 350, 450, 400, 35, new Font("Arial", Font.PLAIN | Font.ITALIC, 20));
+        JLabel labelInval = CreadorComponentes.crearLabel("", 100, 460, 800, 35, new Font("Arial", Font.PLAIN | Font.ITALIC, 18));
         labelInval.setForeground(Color.RED);
+        labelInval.setHorizontalAlignment(SwingConstants.CENTER);
         labelInval.setVisible(false);
         ventanaMostrar.add(labelInval);
 
-        JLabel labelExport = CreadorComponentes.crearLabel("Archivo exportado correctamente", 350,460,400,35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+        JLabel labelExport = CreadorComponentes.crearLabel("Archivo exportado correctamente", 100, 460, 800, 35, new Font("Arial", Font.BOLD | Font.ITALIC, 18));
         labelExport.setForeground(Color.GREEN);
+        labelExport.setHorizontalAlignment(SwingConstants.CENTER);
         labelExport.setVisible(false);
         ventanaMostrar.add(labelExport);
 
@@ -60,12 +63,12 @@ public class VntMostrar {
                 datosCartas[i][4] = carta.getTipo();
             }
 
-            JScrollPane tablaCartas = CreadorComponentes.crearTabla(datosCartas,columnasTabla, 50, 70, 900, 400, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
+            JScrollPane tablaCartas = CreadorComponentes.crearTabla(datosCartas,columnasTabla, 50, 90, 900, 340, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
             ventanaMostrar.add(tablaCartas);
 
         } else {
 
-            invalidacion(labelInval, "Error al mostrar la BD", 420, 280, 400);
+            invalidacion(labelInval, "Error al mostrar la BD", 100, 460, 800);
 
         }
 
@@ -82,7 +85,7 @@ public class VntMostrar {
 
             } else {
 
-                invalidacion(labelInval, "Error al exportar archivo", 400, 460, 400);
+                invalidacion(labelInval, "Error al exportar archivo", 100, 460, 800);
 
             }
         });

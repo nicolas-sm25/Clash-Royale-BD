@@ -18,49 +18,53 @@ public class VntInsertar {
         JFrame ventanaInsert = CreadorComponentes.crearVentana("Insertar una carta");
         ventanaInsert.setLayout(null);
 
-        JButton btnInsCarta = CreadorComponentes.crearBoton("Insertar carta", 300, 500, 200, 40, new Font("Arial", Font.BOLD, 14));
-        ventanaInsert.add(btnInsCarta);
+        JLabel labelTitulo = CreadorComponentes.crearLabel("INSERTAR CARTA", 350, 20, 400, 40, new Font("Arial", Font.BOLD, 28));
+        ventanaInsert.add(labelTitulo);
 
-        JButton btnVolver = CreadorComponentes.crearBoton("Volver", 600, 500, 100, 40, new Font("Arial", Font.BOLD, 14));
-        ventanaInsert.add(btnVolver);
-
-
-        JLabel labelNombreCarta = CreadorComponentes.crearLabel("Nombre de la carta:", 50, 30, 300, 35, new Font("Arial", Font.PLAIN, 20));
+        JLabel labelNombreCarta = CreadorComponentes.crearLabel("Nombre de la carta:", 50, 80, 300, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaInsert.add(labelNombreCarta);
 
-        JTextField textFieldNombreCarta = CreadorComponentes.crearTextField(50, 70, 300, 35, new Font("Arial", Font.PLAIN, 20));
+        JTextField textFieldNombreCarta = CreadorComponentes.crearTextField(50, 120, 300, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaInsert.add(textFieldNombreCarta);
 
-        JLabel labelElixir = CreadorComponentes.crearLabel("Costo de elixir:", 50, 200, 300, 35, new Font("Arial", Font.PLAIN, 20));
+        JLabel labelElixir = CreadorComponentes.crearLabel("Costo de elixir:", 50, 250, 300, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaInsert.add(labelElixir);
 
         String[] costos = {"Selecciona una opción...", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "0 (Solo tropas de torre)"};
-        JComboBox<String> menuElixir = CreadorComponentes.crearComboBox(costos, 50, 240, 300, 35, new Font("Arial", Font.PLAIN, 14));
+        JComboBox<String> menuElixir = CreadorComponentes.crearComboBox(costos, 50, 290, 300, 35, new Font("Arial", Font.PLAIN, 14));
         ventanaInsert.add(menuElixir);
 
-        JLabel labelRareza = CreadorComponentes.crearLabel("Rareza:", 600, 30, 300, 35, new Font("Arial", Font.PLAIN, 20));
+        JLabel labelRareza = CreadorComponentes.crearLabel("Rareza:", 650, 80, 300, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaInsert.add(labelRareza);
 
         String[] rarezas = {"Selecciona una opción...", "Común", "Especial", "Épica", "Legendaria", "Campeón"};
-        JComboBox<String> menuRareza = CreadorComponentes.crearComboBox(rarezas, 600, 70, 300, 35, new Font("Arial", Font.PLAIN, 14));
+        JComboBox<String> menuRareza = CreadorComponentes.crearComboBox(rarezas, 650, 120, 250, 35, new Font("Arial", Font.PLAIN, 14));
         ventanaInsert.add(menuRareza);
 
-        JLabel labelTipo = CreadorComponentes.crearLabel("Tipo:", 600, 200, 300, 35, new Font("Arial", Font.PLAIN, 20));
+        JLabel labelTipo = CreadorComponentes.crearLabel("Tipo:", 650, 250, 300, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaInsert.add(labelTipo);
 
         String[] tipos = {"Selecciona una opción...", "Tropa", "Estructura", "Hechizo", "Tropa de torre"};
-        JComboBox<String> menuTipos = CreadorComponentes.crearComboBox(tipos, 600, 240, 300, 35, new Font("Arial", Font.PLAIN, 14));
+        JComboBox<String> menuTipos = CreadorComponentes.crearComboBox(tipos, 650, 290, 250, 35, new Font("Arial", Font.PLAIN, 14));
         ventanaInsert.add(menuTipos);
 
-        JLabel labelInval = CreadorComponentes.crearLabel("", 350, 450, 400, 35, new Font("Arial", Font.PLAIN | Font.ITALIC, 20));
+        JLabel labelInval = CreadorComponentes.crearLabel("", 200, 400, 600, 35, new Font("Arial", Font.PLAIN | Font.ITALIC, 18));
         labelInval.setForeground(Color.RED);
+        labelInval.setHorizontalAlignment(SwingConstants.CENTER);
         labelInval.setVisible(false);
         ventanaInsert.add(labelInval);
 
-        JLabel labelCartaAgg = CreadorComponentes.crearLabel("Carta agregada correctamente", 350, 450, 400, 35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+        JLabel labelCartaAgg = CreadorComponentes.crearLabel("Carta agregada correctamente", 100, 400, 800, 35, new Font("Arial", Font.BOLD | Font.ITALIC, 18));
         labelCartaAgg.setForeground(Color.GREEN);
+        labelInval.setHorizontalAlignment(SwingConstants.CENTER);
         labelCartaAgg.setVisible(false);
         ventanaInsert.add(labelCartaAgg);
+
+        JButton btnInsCarta = CreadorComponentes.crearBoton("Insertar carta", 300, 490, 170, 45, new Font("Arial", Font.BOLD, 14));
+        ventanaInsert.add(btnInsCarta);
+
+        JButton btnVolver = CreadorComponentes.crearBoton("Volver", 530, 490, 170, 45, new Font("Arial", Font.BOLD, 14));
+        ventanaInsert.add(btnVolver);
 
         btnInsCarta.addActionListener(aeBtnInsCarta -> {
 
@@ -69,15 +73,15 @@ public class VntInsertar {
 
             if(textFieldNombreCarta.getText().isBlank() || menuElixir.getSelectedIndex() == 0 || menuRareza.getSelectedIndex() == 0 || menuTipos.getSelectedIndex() == 0){
 
-                invalidacion(labelInval, "Datos invalidos, intente de nuevo", 350, 450, 400);
+                invalidacion(labelInval, "Datos invalidos, intente de nuevo", 100, 400, 800);
 
             } else if (menuElixir.getSelectedIndex() == 11 && menuTipos.getSelectedIndex() != 4) {
 
-                invalidacion(labelInval, "Solo las Tropas de torre pueden tener un costo de elixir de 0", 230, 450, 600);
+                invalidacion(labelInval, "Solo las Tropas de torre pueden tener un costo de elixir de 0", 100, 400, 800);
 
             } else if (menuElixir.getSelectedIndex() != 11 && menuTipos.getSelectedIndex() == 4) {
 
-                invalidacion(labelInval, "Las Tropas de torre no pueden tener un costo de elixir distinto a 0", 200, 450, 700);
+                invalidacion(labelInval, "Las Tropas de torre no pueden tener un costo de elixir distinto a 0", 100, 400, 800);
 
             } else {
 
@@ -106,8 +110,7 @@ public class VntInsertar {
 
                 } else {
 
-                    invalidacion(labelInval, "Error al agregar carta", 350, 450, 400);
-
+                    invalidacion(labelInval, "Error al agregar carta", 100, 400, 800);
                 }
 
             }

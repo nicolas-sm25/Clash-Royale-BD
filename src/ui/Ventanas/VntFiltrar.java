@@ -23,48 +23,57 @@ public class VntFiltrar {
 
         JScrollPane[] tablaActual = new JScrollPane[1];
 
-        JLabel titulo = CreadorComponentes.crearLabel("Filtros", 450, 30, 200, 35, new Font("Arial", Font.BOLD, 24));
+        JLabel titulo = CreadorComponentes.crearLabel("FILTRAR CARTAS", 250, 20, 500, 40, new Font("Arial", Font.BOLD, 28));
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
         ventanaFiltrar.add(titulo);
 
-        JLabel labelRareza = CreadorComponentes.crearLabel("Rareza:", 50, 100, 150, 35, new Font("Arial", Font.PLAIN, 20));
+
+        JLabel labelRareza = CreadorComponentes.crearLabel("Rareza:", 80, 90, 200, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaFiltrar.add(labelRareza);
 
         String[] rarezas = {"Cualquiera", "Común", "Especial", "Épica", "Legendaria", "Campeón"};
-        JComboBox<String> menuRareza = CreadorComponentes.crearComboBox(rarezas, 50, 140, 250, 35, new Font("Arial", Font.PLAIN, 14));
+        JComboBox<String> menuRareza = CreadorComponentes.crearComboBox(rarezas, 80, 130, 220, 35, new Font("Arial", Font.PLAIN, 14));
         ventanaFiltrar.add(menuRareza);
 
-        JLabel labelTipo = CreadorComponentes.crearLabel("Tipo:", 370, 100, 150, 35, new Font("Arial", Font.PLAIN, 20));
+
+        JLabel labelTipo = CreadorComponentes.crearLabel("Tipo:", 390, 90, 200, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaFiltrar.add(labelTipo);
 
         String[] tipos = {"Cualquiera", "Tropa", "Estructura", "Hechizo", "Tropa de torre"};
-        JComboBox<String> menuTipo = CreadorComponentes.crearComboBox(tipos, 370, 140, 250, 35, new Font("Arial", Font.PLAIN, 14));
+        JComboBox<String> menuTipo = CreadorComponentes.crearComboBox(tipos, 390, 130, 220, 35, new Font("Arial", Font.PLAIN, 14));
         ventanaFiltrar.add(menuTipo);
 
-        JLabel labelElixir = CreadorComponentes.crearLabel("Elixir:", 690, 100, 150, 35, new Font("Arial", Font.PLAIN, 20));
+
+        JLabel labelElixir = CreadorComponentes.crearLabel("Elixir:", 700, 90, 200, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaFiltrar.add(labelElixir);
 
         String[] listElixir = {"Cualquiera", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-        JComboBox<String> menuElixir = CreadorComponentes.crearComboBox(listElixir, 690, 140, 250, 35, new Font("Arial", Font.PLAIN, 14));
+        JComboBox<String> menuElixir = CreadorComponentes.crearComboBox(listElixir, 700, 130, 220, 35, new Font("Arial", Font.PLAIN, 14));
         ventanaFiltrar.add(menuElixir);
 
-        JLabel labelInval = CreadorComponentes.crearLabel("", 350, 460, 400, 35, new Font("Arial", Font.PLAIN | Font.ITALIC, 20));
+
+        JLabel labelInval = CreadorComponentes.crearLabel("", 100, 460, 800, 35, new Font("Arial", Font.PLAIN | Font.ITALIC, 18));
         labelInval.setForeground(Color.RED);
+        labelInval.setHorizontalAlignment(SwingConstants.CENTER);
         labelInval.setVisible(false);
         ventanaFiltrar.add(labelInval);
 
-        JLabel labelExport = CreadorComponentes.crearLabel("Archivo exportado correctamente", 350,460,400,35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+
+        JLabel labelExport = CreadorComponentes.crearLabel("Archivo exportado correctamente", 100, 460, 800, 35, new Font("Arial", Font.BOLD | Font.ITALIC, 18));
         labelExport.setForeground(Color.GREEN);
+        labelExport.setHorizontalAlignment(SwingConstants.CENTER);
         labelExport.setVisible(false);
         ventanaFiltrar.add(labelExport);
 
-        JButton btnFiltrar = CreadorComponentes.crearBoton("Filtrar", 320, 500, 120, 40, new Font("Arial", Font.BOLD, 14));
+
+        JButton btnFiltrar = CreadorComponentes.crearBoton("Filtrar", 250, 510, 150, 40, new Font("Arial", Font.BOLD, 14));
         ventanaFiltrar.add(btnFiltrar);
 
-        JButton btnVolver = CreadorComponentes.crearBoton("Volver", 650, 500, 120, 40, new Font("Arial", Font.BOLD, 14));
-        ventanaFiltrar.add(btnVolver);
-
-        JButton btnExport = CreadorComponentes.crearBoton("Exportar a .txt", 450, 500, 150, 40, new Font("Arial", Font.BOLD, 14));
+        JButton btnExport = CreadorComponentes.crearBoton("Exportar a .txt", 430, 510, 160, 40, new Font("Arial", Font.BOLD, 14));
         ventanaFiltrar.add(btnExport);
+
+        JButton btnVolver = CreadorComponentes.crearBoton("Volver", 620, 510, 150, 40, new Font("Arial", Font.BOLD, 14));
+        ventanaFiltrar.add(btnVolver);
 
 
         btnFiltrar.addActionListener(aeBtnFiltrar -> {
@@ -106,11 +115,11 @@ public class VntFiltrar {
 
             if(!dao.getAccionCompletada()){
 
-                invalidacion(labelInval, "Error al conectar con la BD", 390, 460, 400);
+                invalidacion(labelInval, "Error al conectar con la BD", 100, 460, 800);
 
             } else if(cartas.isEmpty()){
 
-                invalidacion(labelInval, "No se encontraron cartas", 390, 460, 400);
+                invalidacion(labelInval, "No se encontraron cartas", 100, 460, 800);
 
             } else {
 
@@ -130,8 +139,7 @@ public class VntFiltrar {
                 }
 
 
-                tablaActual[0]= CreadorComponentes.crearTabla(datos, columnas, 50, 220, 900, 220, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
-
+                tablaActual[0] = CreadorComponentes.crearTabla(datos, columnas, 50, 220, 900, 220, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
                 ventanaFiltrar.add(tablaActual[0]);
 
                 ventanaFiltrar.revalidate();
@@ -148,7 +156,7 @@ public class VntFiltrar {
 
             if(listaCartasExprt[0] == null || listaCartasExprt[0].isEmpty()){
 
-                invalidacion(labelInval, "Primero realiza una búsqueda valida", 380, 460, 400);
+                invalidacion(labelInval, "Primero realiza una búsqueda valida", 100, 460, 800);
 
             } else {
 
@@ -160,7 +168,7 @@ public class VntFiltrar {
 
                 } else {
 
-                    invalidacion(labelInval, "Error al exportar archivo", 400, 460, 400);
+                    invalidacion(labelInval, "Error al exportar archivo", 100, 460, 800);
 
                 }
             }

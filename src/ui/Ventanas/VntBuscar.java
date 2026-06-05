@@ -23,38 +23,51 @@ public class VntBuscar {
 
         JScrollPane[] tablaActual = new JScrollPane[1];
 
-        JButton btnBusq = CreadorComponentes.crearBoton("Buscar", 320, 500, 100, 40, new Font("Arial", Font.BOLD, 14));
+        JButton btnBusq = CreadorComponentes.crearBoton("Buscar", 250, 510, 150, 40, new Font("Arial", Font.BOLD, 14));
         ventanaBuscar.add(btnBusq);
 
-        JButton btnExport = CreadorComponentes.crearBoton("Exportar a .txt", 450, 500, 150, 40, new Font("Arial", Font.BOLD, 14));
+        JButton btnExport = CreadorComponentes.crearBoton("Exportar a .txt", 430, 510, 160, 40, new Font("Arial", Font.BOLD, 14));
         ventanaBuscar.add(btnExport);
 
-        JButton btnVolver = CreadorComponentes.crearBoton("Volver", 630, 500, 100, 40, new Font("Arial", Font.BOLD, 14));
+        JButton btnVolver = CreadorComponentes.crearBoton("Volver", 620, 510, 150, 40, new Font("Arial", Font.BOLD, 14));
         ventanaBuscar.add(btnVolver);
 
-        JLabel labelBusqNombre = CreadorComponentes.crearLabel("Buscar por nombre:", 50, 30, 300, 35, new Font("Arial", Font.PLAIN, 20));
+
+        JLabel labelTituloVentana = CreadorComponentes.crearLabel("BUSCAR CARTAS", 250, 20, 500, 40, new Font("Arial", Font.BOLD, 28));
+        labelTituloVentana.setHorizontalAlignment(SwingConstants.CENTER);
+        ventanaBuscar.add(labelTituloVentana);
+
+
+        JLabel labelBusqNombre = CreadorComponentes.crearLabel("Buscar por nombre:", 100, 90, 250, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaBuscar.add(labelBusqNombre);
 
-        JTextField textFieldNombreABusq = CreadorComponentes.crearTextField(50, 70, 300, 35, new Font("Arial", Font.PLAIN, 20));
+        JTextField textFieldNombreABusq = CreadorComponentes.crearTextField(100, 130, 300, 35, new Font("Arial", Font.PLAIN, 18));
         ventanaBuscar.add(textFieldNombreABusq);
 
-        JLabel labelBusqID = CreadorComponentes.crearLabel("Buscar por ID:", 600, 30, 300, 35, new Font("Arial", Font.PLAIN, 20));
+
+        JLabel labelBusqID = CreadorComponentes.crearLabel("Buscar por ID:", 600, 90, 250, 35, new Font("Arial", Font.PLAIN, 20));
         ventanaBuscar.add(labelBusqID);
 
-        JTextField textFieldIdABusq = CreadorComponentes.crearTextField(600, 70, 300, 35, new Font("Arial", Font.PLAIN, 20));
+        JTextField textFieldIdABusq = CreadorComponentes.crearTextField(600, 130, 300, 35, new Font("Arial", Font.PLAIN, 18));
         ventanaBuscar.add(textFieldIdABusq);
 
-        JLabel labelTitulo = CreadorComponentes.crearLabel("", 400, 120, 300, 35, new Font("Arial", Font.BOLD, 24));
+
+        JLabel labelTitulo = CreadorComponentes.crearLabel("", 250, 190, 500, 35, new Font("Arial", Font.BOLD, 22));
+        labelTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         labelTitulo.setVisible(false);
         ventanaBuscar.add(labelTitulo);
 
-        JLabel labelInval = CreadorComponentes.crearLabel("", 350, 460, 400, 35, new Font("Arial", Font.PLAIN | Font.ITALIC, 20));
+
+        JLabel labelInval = CreadorComponentes.crearLabel("", 100, 460, 800, 35, new Font("Arial", Font.PLAIN | Font.ITALIC, 18));
         labelInval.setForeground(Color.RED);
+        labelInval.setHorizontalAlignment(SwingConstants.CENTER);
         labelInval.setVisible(false);
         ventanaBuscar.add(labelInval);
 
-        JLabel labelExport = CreadorComponentes.crearLabel("Archivo exportado correctamente", 350,460,400,35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+
+        JLabel labelExport = CreadorComponentes.crearLabel("Archivo exportado correctamente", 100, 460, 800, 35, new Font("Arial", Font.BOLD | Font.ITALIC, 18));
         labelExport.setForeground(Color.GREEN);
+        labelExport.setHorizontalAlignment(SwingConstants.CENTER);
         labelExport.setVisible(false);
         ventanaBuscar.add(labelExport);
 
@@ -67,11 +80,11 @@ public class VntBuscar {
 
             if (textFieldNombreABusq.getText().isEmpty() && textFieldIdABusq.getText().isBlank()){
 
-                invalidacion(labelInval, "Datos invalidos, intente de nuevo", 350, 460, 400);
+                invalidacion(labelInval, "Datos invalidos, intente de nuevo", 100, 460, 800);
 
             } else if (!textFieldNombreABusq.getText().isEmpty() && !textFieldIdABusq.getText().isBlank()){
 
-                invalidacion(labelInval, "Solo se puede realizar una busqueda a la vez", 300, 460, 500);
+                invalidacion(labelInval, "Solo se puede realizar una busqueda a la vez", 100, 460, 800);
                 textFieldNombreABusq.setText("");
                 textFieldIdABusq.setText("");
 
@@ -86,7 +99,7 @@ public class VntBuscar {
 
                     if (nombresEncontrados.isEmpty()) {
 
-                        invalidacion(labelInval, "No se encontraron cartas", 400, 460, 400);
+                        invalidacion(labelInval, "No se encontraron cartas", 100, 460, 800);
                         textFieldNombreABusq.setText("");
 
                     } else {
@@ -120,8 +133,7 @@ public class VntBuscar {
                         labelTitulo.setText("Cartas encontradas");
                         labelTitulo.setVisible(true);
 
-                        tablaActual[0] = CreadorComponentes.crearTabla(cartasEnc,columnasTabla, 50, 160, 900, 300, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
-                        ventanaBuscar.add(tablaActual[0]);
+                        tablaActual[0] = CreadorComponentes.crearTabla(cartasEnc, columnasTabla, 50, 230, 900, 200, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));                        ventanaBuscar.add(tablaActual[0]);
                         ventanaBuscar.revalidate();
                         ventanaBuscar.repaint();
 
@@ -131,7 +143,7 @@ public class VntBuscar {
 
                 } else {
 
-                    invalidacion(labelInval, "Error al mostrar cartas", 420, 280, 400);
+                    invalidacion(labelInval, "Error al mostrar cartas", 100, 460, 800);
 
                 }
 
@@ -142,14 +154,14 @@ public class VntBuscar {
                     id = Integer.parseInt(idAux);
                 } catch (NumberFormatException e){
 
-                    invalidacion(labelInval, "Datos invalidos, intente de nuevo", 350, 460, 400);
+                    invalidacion(labelInval, "Datos invalidos, intente de nuevo", 100, 460, 800);
                     textFieldIdABusq.setText("");
                     return;
                 }
 
                 if (id <= 0){
 
-                    invalidacion(labelInval, "ID invalida, intente de nuevo", 350, 460, 400);
+                    invalidacion(labelInval, "ID invalida, intente de nuevo", 100, 460, 800);
                     textFieldIdABusq.setText("");
 
                 } else {
@@ -172,7 +184,7 @@ public class VntBuscar {
 
                         if (idEncontrada == null) {
 
-                            invalidacion(labelInval, "No se encontró carta con esa ID", 370, 460, 400);
+                            invalidacion(labelInval, "No se encontró carta con esa ID", 100, 460, 800);
                             textFieldIdABusq.setText("");
 
                         } else {
@@ -191,8 +203,7 @@ public class VntBuscar {
                             labelTitulo.setText("Carta encontrada");
                             labelTitulo.setVisible(true);
 
-                            tablaActual[0] = CreadorComponentes.crearTabla(idEnc,columnasTabla, 50, 250, 900, 49, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
-                            ventanaBuscar.add(tablaActual[0]);
+                            tablaActual[0] = CreadorComponentes.crearTabla(idEnc, columnasTabla, 50, 260, 900, 50, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));                            ventanaBuscar.add(tablaActual[0]);
                             ventanaBuscar.revalidate();
                             ventanaBuscar.repaint();
 
@@ -202,7 +213,7 @@ public class VntBuscar {
 
                     } else {
 
-                        invalidacion(labelInval, "Error al mostrar cartas", 420, 280, 400);
+                        invalidacion(labelInval, "Error al mostrar cartas", 100, 460, 800);
 
                     }
                 }
@@ -217,7 +228,7 @@ public class VntBuscar {
 
             if(listaCartasExprt[0] == null || listaCartasExprt[0].isEmpty()){
 
-                invalidacion(labelInval, "Primero realiza una búsqueda valida", 380, 460, 400);
+                invalidacion(labelInval, "Primero realiza una búsqueda valida", 100, 460, 800);
 
             } else {
 
@@ -229,7 +240,7 @@ public class VntBuscar {
 
                 } else {
 
-                    invalidacion(labelInval, "Error al exportar archivo", 400, 460, 400);
+                    invalidacion(labelInval, "Error al exportar archivo", 100, 460, 800);
 
                 }
 
