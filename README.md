@@ -1,32 +1,38 @@
-# Clash Royale Database - CRUD en Java con PostgreSQL
+# Clash Royale Database - Sistema de Gestión de Cartas con Java y PostgreSQL
 
-Proyecto desarrollado en Java utilizando JDBC y PostgreSQL para gestionar una base de datos de cartas de Clash Royale.  
-Solución al segundo parcial de POO de la UD.
+Proyecto desarrollado en Java utilizando Swing, JDBC y PostgreSQL para gestionar una base de datos de cartas de Clash Royale mediante una interfaz gráfica.
+
+Solución desarrollada para el segundo parcial de Programación Orientada a Objetos (POO) de la Universidad Distrital.
 
 ---
 
 # Funcionalidades
 
-- Adicionar cartas a la base de datos
-- Mostrar todas las cartas registradas
-- Buscar cartas por ID
-- Buscar cartas por nombre
-- Filtrar cartas por:
-  - Elixir
-  - Rareza
-  - Tipo
-- Validación de datos ingresados por el usuario
-- Menú infinito interactivo
+* Adicionar cartas a la base de datos
+* Mostrar todas las cartas registradas
+* Buscar cartas por:
+
+  * ID
+  * Nombre
+* Filtrar cartas por:
+
+  * Elixir
+  * Rareza
+  * Tipo
+* Exportar resultados a archivos `.txt`
+* Validación de datos ingresados por el usuario
+* Manejo de errores y mensajes informativos mediante interfaz gráfica
 
 ---
 
 # Tecnologías utilizadas
 
-- Java
-- JDBC
-- PostgreSQL
-- Neon Database
-- IntelliJ IDEA
+* Java
+* Swing
+* JDBC
+* PostgreSQL
+* Neon Database
+* IntelliJ IDEA
 
 ---
 
@@ -42,8 +48,18 @@ src
 ├── model
 │   └── Carta.java
 │
-└── ui
-    └── Main.java
+├── ui
+│   ├── CreadorComponentes.java
+│   └── Ventanas
+│       ├── VntInsertar.java
+│       ├── VntMostrar.java
+│       ├── VntBuscar.java
+│       └── VntFiltrar.java
+│
+├── util
+│   └── ExportadorTXT.java
+│
+└── Main.java
 ```
 
 ---
@@ -52,18 +68,28 @@ src
 
 ## model
 
-Contiene la clase `Carta`, utilizada para representar cada registro de la base de datos como un objeto Java.
+Contiene la clase `Carta`, utilizada para representar cada carta almacenada en la base de datos como un objeto Java.
 
 ## dao
 
 Contiene:
 
-- `ConexionDB`: maneja la conexión con PostgreSQL.
-- `CartaDAO`: contiene todas las consultas SQL y operaciones CRUD.
+* `ConexionDB`: maneja la conexión con PostgreSQL.
+* `CartaDAO`: contiene las consultas SQL y operaciones sobre la base de datos.
 
 ## ui
 
-Contiene el menú principal y toda la interacción con el usuario.
+Contiene:
+
+* `Main`: ventana principal de la aplicación.
+* `CreadorComponentes`: centraliza la creación de componentes gráficos reutilizables.
+* Ventanas individuales para cada funcionalidad del sistema.
+
+## util
+
+Contiene:
+
+* `ExportadorTXT`: permite generar archivos `.txt` con los resultados de las consultas realizadas.
 
 ---
 
@@ -75,7 +101,7 @@ Tabla utilizada:
 CREATE TABLE cartas (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50),
-    costo INT,
+    elixir INT,
     rareza VARCHAR(30),
     tipo VARCHAR(30)
 );
@@ -88,7 +114,7 @@ CREATE TABLE cartas (
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/TU-USUARIO/TU-REPOSITORIO.git
+git clone https://github.com/nicolas-sm25/Clash-Royale-BD.git
 ```
 
 2. Abrir el proyecto en IntelliJ IDEA
@@ -103,19 +129,21 @@ private static final String USER = "...";
 private static final String PASS = "...";
 ```
 
-5. Ejecutar `Main.java`
+5. Ejecutar:
+
+```java
+Main.java
+```
 
 ---
 
-# Ejemplo de uso
+# Funciones disponibles dentro de la aplicación
 
 ```plaintext
-===== BASE DE DATOS CARTAS DE CLASH ROYALE =====
-
-1. Insertar carta a la BD
-2. Mostrar BD
-3. Buscar una carta
-4. Filtrar
+1. Insertar carta
+2. Mostrar base de datos
+3. Buscar carta
+4. Filtrar cartas
 5. Salir
 ```
 
@@ -123,21 +151,19 @@ private static final String PASS = "...";
 
 # Conceptos aplicados
 
-- Programación Orientada a Objetos
-- JDBC
-- DAO Pattern
-- PreparedStatement
-- ResultSet
-- Validación de datos
-- Mapeo Objeto-Relacional
-- Manejo de excepciones
-- Separación de responsabilidades
+* Programación Orientada a Objetos
+* Swing
+* JDBC
+* DAO Pattern
+* PreparedStatement
+* ResultSet
+* Validación de datos
+* Manejo de excepciones
+* Mapeo Objeto-Relacional
+* Reutilización de componentes
+* Separación de responsabilidades
 
 ---
-
-
-
-
 
 ## Diagrama UML
 
@@ -145,38 +171,53 @@ private static final String PASS = "...";
 classDiagram
 
 class Main{
-  +validarInt()
-  +main()
+    +main()
 }
 
 class Carta{
-  -int id
-  -String nombre
-  -int elixir
-  -String rareza
-  -String tipo
-  +toString()
+    -int id
+    -String nombre
+    -int elixir
+    -String rareza
+    -String tipo
 }
 
 class CartaDAO{
-  +agregarCarta()
-  +listaCartas()
-  +buscarPorId()
-  +buscarPorNombre()
-  +encontrarElixir()
-  +encontrarRareza()
-  +encontrarTipo()
+    +agregarCarta()
+    +listaCartas()
+    +buscarPorId()
+    +buscarPorNombre()
+    +filtrarCartas()
 }
 
 class ConexionDB{
-  +getConnection()
+    +getConnection()
 }
 
-Main --> CartaDAO : usa
-CartaDAO --> ConexionDB : conexión
-CartaDAO --> Carta : crea objetos
+class ExportadorTXT{
+    +exportar()
+}
+
+class CreadorComponentes{
+    +crearVentana()
+    +crearBoton()
+    +crearLabel()
+    +crearTextField()
+    +crearComboBox()
+    +crearTabla()
+}
+
+Main --> CartaDAO
+CartaDAO --> ConexionDB
+CartaDAO --> Carta
+Main --> CreadorComponentes
+Main --> ExportadorTXT
 ```
+
+---
+
 # Autor
 
-Nicolás Soriano Medina  20251020110  
+Nicolás Soriano Medina
+20251020110  
 Universidad Distrital Francisco José de Caldas
