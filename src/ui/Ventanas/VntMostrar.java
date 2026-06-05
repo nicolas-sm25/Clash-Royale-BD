@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
+import static ui.CreadorComponentes.invalidacion;
+
 public class VntMostrar {
 
     CartaDAO dao = new CartaDAO();
@@ -26,25 +28,38 @@ public class VntMostrar {
         JLabel labelTitulo = CreadorComponentes.crearLabel("BD CARTAS", 450, 30, 300, 35, new Font("Arial", Font.BOLD, 24));
         ventanaMostrar.add(labelTitulo);
 
+        JLabel labelInval = CreadorComponentes.crearLabel("", 350, 450, 400, 35, new Font("Arial", Font.PLAIN | Font.ITALIC, 20));
+        labelInval.setForeground(Color.RED);
+        labelInval.setVisible(false);
+        ventanaMostrar.add(labelInval);
+
         List<Carta> listaCartas = dao.listaCartas();
 
-        String[] columnasTabla = {"ID", "Nombre", "Elixir", "Rareza", "Tipo"};
+        if (dao.getAccionCompletada()){
 
-        Object[][] datosCartas = new Object[listaCartas.size()][5];
+            String[] columnasTabla = {"ID", "Nombre", "Elixir", "Rareza", "Tipo"};
 
-        for(int i = 0; i < listaCartas.size(); i++){
+            Object[][] datosCartas = new Object[listaCartas.size()][5];
 
-            Carta carta = listaCartas.get(i);
+            for(int i = 0; i < listaCartas.size(); i++){
 
-            datosCartas[i][0] = carta.getId();
-            datosCartas[i][1] = carta.getNombre();
-            datosCartas[i][2] = carta.getElixir();
-            datosCartas[i][3] = carta.getRareza();
-            datosCartas[i][4] = carta.getTipo();
+                Carta carta = listaCartas.get(i);
+
+                datosCartas[i][0] = carta.getId();
+                datosCartas[i][1] = carta.getNombre();
+                datosCartas[i][2] = carta.getElixir();
+                datosCartas[i][3] = carta.getRareza();
+                datosCartas[i][4] = carta.getTipo();
+            }
+
+            JScrollPane tablaCartas = CreadorComponentes.crearTabla(datosCartas,columnasTabla, 50, 70, 900, 400, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
+            ventanaMostrar.add(tablaCartas);
+
+        } else {
+
+            invalidacion(labelInval, "Error al mostrar la BD", 420, 280, 400);
+
         }
-
-        JScrollPane tablaCartas = CreadorComponentes.crearTabla(datosCartas,columnasTabla, 50, 70, 900, 400, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
-        ventanaMostrar.add(tablaCartas);
 
         btnExport.addActionListener(aeBtnExport -> {
 

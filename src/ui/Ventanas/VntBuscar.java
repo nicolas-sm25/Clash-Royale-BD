@@ -71,26 +71,28 @@ public class VntBuscar {
 
                 List<Carta> nombresEncontrados = dao.buscarPorNombre(nombreABusq);
 
-                if (nombresEncontrados.isEmpty()) {
+                if(dao.getAccionCompletada()){
 
-                    invalidacion(labelInval, "No se encontraron cartas", 400, 460, 400);
+                    if (nombresEncontrados.isEmpty()) {
 
-                } else {
+                        invalidacion(labelInval, "No se encontraron cartas", 400, 460, 400);
 
-                    if(tablaActual[0] != null){
+                    } else {
 
-                        labelTitulo.setVisible(false);
+                        if(tablaActual[0] != null){
 
-                        ventanaBuscar.remove(tablaActual[0]);
+                            labelTitulo.setVisible(false);
 
-                        ventanaBuscar.revalidate();
-                        ventanaBuscar.repaint();
+                            ventanaBuscar.remove(tablaActual[0]);
 
-                    }
+                            ventanaBuscar.revalidate();
+                            ventanaBuscar.repaint();
 
-                    String[] columnasTabla = {"ID", "Nombre", "Elixir", "Rareza", "Tipo"};
+                        }
 
-                    Object[][] cartasEnc = new Object[nombresEncontrados.size()][5];
+                        String[] columnasTabla = {"ID", "Nombre", "Elixir", "Rareza", "Tipo"};
+
+                        Object[][] cartasEnc = new Object[nombresEncontrados.size()][5];
 
                         for(int i = 0; i < nombresEncontrados.size(); i++){
 
@@ -112,6 +114,12 @@ public class VntBuscar {
                         ventanaBuscar.repaint();
 
                     }
+
+                } else {
+
+                    invalidacion(labelInval, "Error al mostrar cartas", 420, 280, 400);
+
+                }
 
                 } else {
 
@@ -143,28 +151,36 @@ public class VntBuscar {
 
                     Carta idEncontrada = dao.buscarPorId(id);
 
-                    if (idEncontrada == null) {
+                    if (dao.getAccionCompletada()){
 
-                        invalidacion(labelInval, "No se encontró carta con esa ID", 370, 460, 400);
+                        if (idEncontrada == null) {
+
+                            invalidacion(labelInval, "No se encontró carta con esa ID", 370, 460, 400);
+
+                        } else {
+
+                            String[] columnasTabla = {"ID", "Nombre", "Elixir", "Rareza", "Tipo"};
+
+                            Object[][] idEnc = new Object[1][5];
+                            idEnc[0][0] = idEncontrada.getId();
+                            idEnc[0][1] = idEncontrada.getNombre();
+                            idEnc[0][2] = idEncontrada.getElixir();
+                            idEnc[0][3] = idEncontrada.getRareza();
+                            idEnc[0][4] = idEncontrada.getTipo();
+
+                            labelTitulo.setText("Carta encontrada");
+                            labelTitulo.setVisible(true);
+
+                            tablaActual[0] = CreadorComponentes.crearTabla(idEnc,columnasTabla, 50, 250, 900, 49, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
+                            ventanaBuscar.add(tablaActual[0]);
+                            ventanaBuscar.revalidate();
+                            ventanaBuscar.repaint();
+
+                        }
 
                     } else {
 
-                        String[] columnasTabla = {"ID", "Nombre", "Elixir", "Rareza", "Tipo"};
-
-                        Object[][] idEnc = new Object[1][5];
-                        idEnc[0][0] = idEncontrada.getId();
-                        idEnc[0][1] = idEncontrada.getNombre();
-                        idEnc[0][2] = idEncontrada.getElixir();
-                        idEnc[0][3] = idEncontrada.getRareza();
-                        idEnc[0][4] = idEncontrada.getTipo();
-
-                        labelTitulo.setText("Carta encontrada");
-                        labelTitulo.setVisible(true);
-
-                        tablaActual[0] = CreadorComponentes.crearTabla(idEnc,columnasTabla, 50, 250, 900, 49, 25, new Font("Arial", Font.BOLD, 14), new Font("Arial", Font.PLAIN, 13));
-                        ventanaBuscar.add(tablaActual[0]);
-                        ventanaBuscar.revalidate();
-                        ventanaBuscar.repaint();
+                        invalidacion(labelInval, "Error al mostrar cartas", 420, 280, 400);
 
                     }
                 }

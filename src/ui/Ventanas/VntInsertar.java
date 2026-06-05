@@ -62,16 +62,10 @@ public class VntInsertar {
         labelCartaAgg.setVisible(false);
         ventanaInsert.add(labelCartaAgg);
 
-        JLabel labelError = CreadorComponentes.crearLabel("Error al agregar carta", 350, 450, 400, 35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
-        labelError.setForeground(Color.RED);
-        labelError.setVisible(false);
-        ventanaInsert.add(labelError);
-
         btnInsCarta.addActionListener(aeBtnInsCarta -> {
 
             labelInval.setVisible(false);
             labelCartaAgg.setVisible(false);
-            labelError.setVisible(false);
 
             if(textFieldNombreCarta.getText().isBlank() || menuElixir.getSelectedIndex() == 0 || menuRareza.getSelectedIndex() == 0 || menuTipos.getSelectedIndex() == 0){
 
@@ -101,13 +95,20 @@ public class VntInsertar {
                 Carta carta = new Carta(nombre, elixir, rareza, tipo);
                 dao.agregarCarta(carta);
 
-                labelCartaAgg.setVisible(dao.getAccionCompletada());
-                labelError.setVisible(!dao.getAccionCompletada());
+                if (dao.getAccionCompletada()){
 
-                textFieldNombreCarta.setText("");
-                menuElixir.setSelectedIndex(0);
-                menuRareza.setSelectedIndex(0);
-                menuTipos.setSelectedIndex(0);
+                    labelCartaAgg.setVisible(true);
+
+                    textFieldNombreCarta.setText("");
+                    menuElixir.setSelectedIndex(0);
+                    menuRareza.setSelectedIndex(0);
+                    menuTipos.setSelectedIndex(0);
+
+                } else {
+
+                    invalidacion(labelInval, "Error al agregar carta", 350, 450, 400);
+
+                }
 
             }
         });

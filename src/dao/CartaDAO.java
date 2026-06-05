@@ -52,10 +52,13 @@ public class CartaDAO {
 
                 carta.setId(rsListCartas.getInt("id"));
                 listaCartas.add(carta);
+
+                accionCompletada = true;
+
             }
 
         } catch (SQLException e) {
-            System.out.println("\nError: " + e.getMessage());
+            accionCompletada = false;
         } return listaCartas;
     }
 
@@ -79,12 +82,14 @@ public class CartaDAO {
                         rsBusqId.getString("tipo"));
 
                 carta.setId(rsBusqId.getInt("id"));
+
+                accionCompletada = true;
+
                 return carta;
             }
 
         } catch (SQLException e) {
-
-            System.out.println("\nError: " + e.getMessage());
+            accionCompletada = false;
         } return null;
     }
 
@@ -112,9 +117,15 @@ public class CartaDAO {
 
                 carta.setId(rsBusqNom.getInt("id"));
                 listaCartasConNombre.add(carta);
-            } } catch (SQLException e) {
 
-            System.out.println("\nError: " + e.getMessage());
+            }
+
+                accionCompletada = true;
+
+            } catch (SQLException e) {
+
+            accionCompletada = false;
+
         } return listaCartasConNombre;
     }
 
@@ -141,9 +152,14 @@ public class CartaDAO {
 
                 carta.setId(rsEncElx.getInt("id"));
                 listaElixir.add(carta);
-            } } catch (SQLException e) {
 
-            System.out.println("\nError: " + e.getMessage());
+            }
+
+                accionCompletada = true;
+
+            } catch (SQLException e) {
+
+            accionCompletada = false;
 
         } return listaElixir;
     }
@@ -171,9 +187,14 @@ public class CartaDAO {
 
                 carta.setId(rsRareza.getInt("id"));
                 listaRareza.add(carta);
-            } } catch (SQLException e) {
 
-            System.out.println("\nError: " + e.getMessage());
+            }
+
+                accionCompletada = true;
+
+            } catch (SQLException e) {
+
+            accionCompletada = false;
 
         } return listaRareza;
     }
@@ -201,9 +222,14 @@ public class CartaDAO {
 
                 carta.setId(rsTipo.getInt("id"));
                 listaTipo.add(carta);
-            } } catch (SQLException e) {
 
-            System.out.println("\nError: " + e.getMessage());
+            }
+
+                accionCompletada = true;
+
+            } catch (SQLException e) {
+
+            accionCompletada = false;
 
         } return listaTipo;
     }
