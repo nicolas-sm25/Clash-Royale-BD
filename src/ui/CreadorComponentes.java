@@ -82,4 +82,16 @@ public class CreadorComponentes {
 
         return scroll;
     }
+
+    //Designar mensajes de invalidacion
+
+    public static JLabel invalidacion(JLabel label, String mensaje, int x, int y, int width) {
+
+        label.setText(mensaje);
+        label.setBounds(x, y, width, 35);
+        label.setVisible(true);
+
+        return label;
+    }
+
 }

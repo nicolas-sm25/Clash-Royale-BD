@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
+import static ui.CreadorComponentes.invalidacion;
+
 public class VntBuscar {
 
     CartaDAO dao = new CartaDAO();
@@ -57,15 +59,11 @@ public class VntBuscar {
 
             if (textFieldNombreABusq.getText().isEmpty() && textFieldIdABusq.getText().isBlank()){
 
-                labelInval.setText("Datos invalidos, intente de nuevo");
-                labelInval.setBounds(350, 460, 400, 35);
-                labelInval.setVisible(true);
+                invalidacion(labelInval, "Datos invalidos, intente de nuevo", 350, 460, 400);
 
             } else if (!textFieldNombreABusq.getText().isEmpty() && !textFieldIdABusq.getText().isBlank()){
 
-                labelInval.setText("Solo se puede realizar una busqueda a la vez");
-                labelInval.setBounds(300, 460, 500, 35);
-                labelInval.setVisible(true);
+                invalidacion(labelInval, "Solo se puede realizar una busqueda a la vez", 300, 460, 500);
 
             } else if(textFieldIdABusq.getText().isBlank()) {
 
@@ -75,9 +73,7 @@ public class VntBuscar {
 
                 if (nombresEncontrados.isEmpty()) {
 
-                    labelInval.setText("No se encontraron cartas");
-                    labelInval.setBounds(400, 460, 400, 35);
-                    labelInval.setVisible(true);
+                    invalidacion(labelInval, "No se encontraron cartas", 400, 460, 400);
 
                 } else {
 
@@ -123,17 +119,14 @@ public class VntBuscar {
                     String idAux = textFieldIdABusq.getText();
                     id = Integer.parseInt(idAux);
                 } catch (NumberFormatException e){
-                    labelInval.setText("Datos invalidos, intente de nuevo");
-                    labelInval.setBounds(350, 460, 400, 35);
-                    labelInval.setVisible(true);
+
+                    invalidacion(labelInval, "Datos invalidos, intente de nuevo", 350, 460, 400);
                     return;
                 }
 
                 if (id <= 0){
 
-                    labelInval.setText("ID invalida, intente de nuevo");
-                    labelInval.setBounds(350, 460, 400, 35);
-                    labelInval.setVisible(true);
+                    invalidacion(labelInval, "ID invalida, intente de nuevo", 350, 460, 400);
 
                 } else {
 
@@ -152,9 +145,7 @@ public class VntBuscar {
 
                     if (idEncontrada == null) {
 
-                        labelInval.setText("No se encontró carta con esa ID");
-                        labelInval.setBounds(370, 460, 400, 35);
-                        labelInval.setVisible(true);
+                        invalidacion(labelInval, "No se encontró carta con esa ID", 370, 460, 400);
 
                     } else {
 

@@ -7,6 +7,8 @@ import ui.CreadorComponentes;
 import javax.swing.*;
 import java.awt.*;
 
+import static ui.CreadorComponentes.invalidacion;
+
 public class VntInsertar {
 
     CartaDAO dao = new CartaDAO();
@@ -73,21 +75,15 @@ public class VntInsertar {
 
             if(textFieldNombreCarta.getText().isBlank() || menuElixir.getSelectedIndex() == 0 || menuRareza.getSelectedIndex() == 0 || menuTipos.getSelectedIndex() == 0){
 
-                labelInval.setText("Datos invalidos, intente de nuevo");
-                labelInval.setBounds(350, 450, 400, 35);
-                labelInval.setVisible(true);
+                invalidacion(labelInval, "Datos invalidos, intente de nuevo", 350, 450, 400);
 
             } else if (menuElixir.getSelectedIndex() == 11 && menuTipos.getSelectedIndex() != 4) {
 
-                labelInval.setText("Solo las Tropas de torre pueden tener un costo de elixir de 0");
-                labelInval.setBounds(230, 450, 600, 35);
-                labelInval.setVisible(true);
+                invalidacion(labelInval, "Solo las Tropas de torre pueden tener un costo de elixir de 0", 230, 450, 600);
 
             } else if (menuElixir.getSelectedIndex() != 11 && menuTipos.getSelectedIndex() == 4) {
 
-                labelInval.setText("Las Tropas de torre no pueden tener un costo de elixir distinto a 0");
-                labelInval.setBounds(200, 450, 700, 35);
-                labelInval.setVisible(true);
+                invalidacion(labelInval, "Las Tropas de torre no pueden tener un costo de elixir distinto a 0", 200, 450, 700);
 
             } else {
 
