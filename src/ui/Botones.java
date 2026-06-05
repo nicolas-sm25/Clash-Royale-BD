@@ -53,6 +53,15 @@ public class Botones extends JPanel {
 
         });
 
+        //Boton buscar
+
+        btnBuscar.addActionListener(aeBtnBuscar -> {
+
+            new VntBuscar();
+
+        });
+
+
 
 
 
