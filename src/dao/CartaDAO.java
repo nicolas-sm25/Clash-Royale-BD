@@ -88,6 +88,8 @@ public class CartaDAO {
                 return carta;
             }
 
+            accionCompletada = true;
+
         } catch (SQLException e) {
             accionCompletada = false;
         } return null;
@@ -127,111 +129,6 @@ public class CartaDAO {
             accionCompletada = false;
 
         } return listaCartasConNombre;
-    }
-
-
-    //Metodo para buscar por elixir
-    public List<Carta> encontrarElixir(String operador, int elixirAEncontrar) {
-
-        List<Carta> listaElixir = new ArrayList<>();
-        String encontrarElixirSQL = "SELECT * FROM cartas WHERE costo " + operador + " ? ORDER BY costo";
-
-        try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement psEncElx = conn.prepareStatement(encontrarElixirSQL)) {
-
-            psEncElx.setInt(1, elixirAEncontrar);
-            ResultSet rsEncElx = psEncElx.executeQuery();
-
-            while (rsEncElx.next()) {
-
-                Carta carta = new Carta(
-                        rsEncElx.getString("nombre"),
-                        rsEncElx.getInt("costo"),
-                        rsEncElx.getString("rareza"),
-                        rsEncElx.getString("tipo"));
-
-                carta.setId(rsEncElx.getInt("id"));
-                listaElixir.add(carta);
-
-            }
-
-                accionCompletada = true;
-
-            } catch (SQLException e) {
-
-            accionCompletada = false;
-
-        } return listaElixir;
-    }
-
-
-    //Metodo para buscar por rareza
-    public List<Carta> encontrarRareza(String rarezaAEncontrar) {
-
-        List<Carta> listaRareza = new ArrayList<>();
-        String encontrarRarezaSQL = "SELECT * FROM cartas WHERE rareza = ?";
-
-        try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement psRareza = conn.prepareStatement(encontrarRarezaSQL)) {
-
-            psRareza.setString(1, rarezaAEncontrar);
-            ResultSet rsRareza = psRareza.executeQuery();
-
-            while (rsRareza.next()) {
-
-                Carta carta = new Carta(
-                        rsRareza.getString("nombre"),
-                        rsRareza.getInt("costo"),
-                        rsRareza.getString("rareza"),
-                        rsRareza.getString("tipo"));
-
-                carta.setId(rsRareza.getInt("id"));
-                listaRareza.add(carta);
-
-            }
-
-                accionCompletada = true;
-
-            } catch (SQLException e) {
-
-            accionCompletada = false;
-
-        } return listaRareza;
-    }
-
-
-    //Metodo para buscar por tipo
-    public List<Carta> encontrarTipo(String tipoAEncontrar) {
-
-        List<Carta> listaTipo = new ArrayList<>();
-        String encontrarTipoSQL = "SELECT * FROM cartas WHERE tipo = ?";
-
-        try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement psTipo = conn.prepareStatement(encontrarTipoSQL)) {
-
-            psTipo.setString(1, tipoAEncontrar);
-            ResultSet rsTipo = psTipo.executeQuery();
-
-            while (rsTipo.next()) {
-
-                Carta carta = new Carta(
-                        rsTipo.getString("nombre"),
-                        rsTipo.getInt("costo"),
-                        rsTipo.getString("rareza"),
-                        rsTipo.getString("tipo"));
-
-                carta.setId(rsTipo.getInt("id"));
-                listaTipo.add(carta);
-
-            }
-
-                accionCompletada = true;
-
-            } catch (SQLException e) {
-
-            accionCompletada = false;
-
-        } return listaTipo;
     }
 
     //Metodo para filtros combinados

@@ -1,7 +1,5 @@
 package ui;
 
-import dao.CartaDAO;
-import model.Carta;
 import ui.Ventanas.*;
 
 import javax.swing.*;
@@ -68,10 +66,6 @@ public class Botones extends JPanel {
             new VntFiltrar();
 
         });
-
-
-
-
 
         //Boton salir
 

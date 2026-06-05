@@ -3,6 +3,7 @@ package ui.Ventanas;
 import dao.CartaDAO;
 import model.Carta;
 import ui.CreadorComponentes;
+import util.ExportadorTXT;
 
 import java.util.List;
 import javax.swing.*;
@@ -13,6 +14,7 @@ import static ui.CreadorComponentes.invalidacion;
 public class VntBuscar {
 
     CartaDAO dao = new CartaDAO();
+    List<Carta>[] listaCartasExprt = new List[1];
 
     public VntBuscar(){
 
@@ -51,10 +53,16 @@ public class VntBuscar {
         labelInval.setVisible(false);
         ventanaBuscar.add(labelInval);
 
+        JLabel labelExport = CreadorComponentes.crearLabel("Archivo exportado correctamente", 350,460,400,35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+        labelExport.setForeground(Color.GREEN);
+        labelExport.setVisible(false);
+        ventanaBuscar.add(labelExport);
+
         btnBusq.addActionListener(aeBtnBusq -> {
 
             int id = 0;
 
+            labelExport.setVisible(false);
             labelInval.setVisible(false);
 
             if (textFieldNombreABusq.getText().isEmpty() && textFieldIdABusq.getText().isBlank()){
@@ -64,18 +72,22 @@ public class VntBuscar {
             } else if (!textFieldNombreABusq.getText().isEmpty() && !textFieldIdABusq.getText().isBlank()){
 
                 invalidacion(labelInval, "Solo se puede realizar una busqueda a la vez", 300, 460, 500);
+                textFieldNombreABusq.setText("");
+                textFieldIdABusq.setText("");
 
             } else if(textFieldIdABusq.getText().isBlank()) {
 
                 String nombreABusq = textFieldNombreABusq.getText();
 
                 List<Carta> nombresEncontrados = dao.buscarPorNombre(nombreABusq);
+                listaCartasExprt[0] = nombresEncontrados;
 
                 if(dao.getAccionCompletada()){
 
                     if (nombresEncontrados.isEmpty()) {
 
                         invalidacion(labelInval, "No se encontraron cartas", 400, 460, 400);
+                        textFieldNombreABusq.setText("");
 
                     } else {
 
@@ -113,6 +125,8 @@ public class VntBuscar {
                         ventanaBuscar.revalidate();
                         ventanaBuscar.repaint();
 
+                        textFieldNombreABusq.setText("");
+
                     }
 
                 } else {
@@ -129,12 +143,14 @@ public class VntBuscar {
                 } catch (NumberFormatException e){
 
                     invalidacion(labelInval, "Datos invalidos, intente de nuevo", 350, 460, 400);
+                    textFieldIdABusq.setText("");
                     return;
                 }
 
                 if (id <= 0){
 
                     invalidacion(labelInval, "ID invalida, intente de nuevo", 350, 460, 400);
+                    textFieldIdABusq.setText("");
 
                 } else {
 
@@ -151,13 +167,17 @@ public class VntBuscar {
 
                     Carta idEncontrada = dao.buscarPorId(id);
 
+
                     if (dao.getAccionCompletada()){
 
                         if (idEncontrada == null) {
 
                             invalidacion(labelInval, "No se encontró carta con esa ID", 370, 460, 400);
+                            textFieldIdABusq.setText("");
 
                         } else {
+
+                            listaCartasExprt[0] = List.of(idEncontrada);
 
                             String[] columnasTabla = {"ID", "Nombre", "Elixir", "Rareza", "Tipo"};
 
@@ -176,6 +196,8 @@ public class VntBuscar {
                             ventanaBuscar.revalidate();
                             ventanaBuscar.repaint();
 
+                            textFieldIdABusq.setText("");
+
                         }
 
                     } else {
@@ -190,8 +212,30 @@ public class VntBuscar {
 
         btnExport.addActionListener(aeBtnExport -> {
 
-            //Despues lo agrego xdd
+            labelExport.setVisible(false);
+            labelInval.setVisible(false);
 
+            if(listaCartasExprt[0] == null || listaCartasExprt[0].isEmpty()){
+
+                invalidacion(labelInval, "Primero realiza una búsqueda valida", 380, 460, 400);
+
+            } else {
+
+                ExportadorTXT.exportar(listaCartasExprt[0]);
+
+                if(ExportadorTXT.getExportacionCompleta()){
+
+                    labelExport.setVisible(true);
+
+                } else {
+
+                    invalidacion(labelInval, "Error al exportar archivo", 400, 460, 400);
+
+                }
+
+            }
+
+            listaCartasExprt[0] = null;
         });
 
         btnVolver.addActionListener(aeBtnVolver -> {

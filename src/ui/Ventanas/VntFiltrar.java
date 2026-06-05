@@ -3,6 +3,7 @@ package ui.Ventanas;
 import dao.CartaDAO;
 import model.Carta;
 import ui.CreadorComponentes;
+import util.ExportadorTXT;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,7 @@ import static ui.CreadorComponentes.invalidacion;
 public class VntFiltrar {
 
     CartaDAO dao = new CartaDAO();
+    List<Carta>[] listaCartasExprt = new List[1];
 
     public VntFiltrar() {
 
@@ -50,6 +52,11 @@ public class VntFiltrar {
         labelInval.setVisible(false);
         ventanaFiltrar.add(labelInval);
 
+        JLabel labelExport = CreadorComponentes.crearLabel("Archivo exportado correctamente", 350,460,400,35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+        labelExport.setForeground(Color.GREEN);
+        labelExport.setVisible(false);
+        ventanaFiltrar.add(labelExport);
+
         JButton btnFiltrar = CreadorComponentes.crearBoton("Filtrar", 320, 500, 120, 40, new Font("Arial", Font.BOLD, 14));
         ventanaFiltrar.add(btnFiltrar);
 
@@ -63,6 +70,7 @@ public class VntFiltrar {
         btnFiltrar.addActionListener(aeBtnFiltrar -> {
 
             labelInval.setVisible(false);
+            labelExport.setVisible(false);
 
             if(tablaActual[0] != null){
 
@@ -94,6 +102,7 @@ public class VntFiltrar {
 
 
             List<Carta> cartas = dao.filtrarCartas(rareza, tipo, elixir);
+            listaCartasExprt[0] = cartas;
 
             if(!dao.getAccionCompletada()){
 
@@ -134,7 +143,29 @@ public class VntFiltrar {
 
         btnExport.addActionListener(aeBtnExport -> {
 
-            //Despues lo agrego xdd
+            labelExport.setVisible(false);
+            labelInval.setVisible(false);
+
+            if(listaCartasExprt[0] == null || listaCartasExprt[0].isEmpty()){
+
+                invalidacion(labelInval, "Primero realiza una búsqueda valida", 380, 460, 400);
+
+            } else {
+
+                ExportadorTXT.exportar(listaCartasExprt[0]);
+
+                if(ExportadorTXT.getExportacionCompleta()){
+
+                    labelExport.setVisible(true);
+
+                } else {
+
+                    invalidacion(labelInval, "Error al exportar archivo", 400, 460, 400);
+
+                }
+            }
+
+            listaCartasExprt[0] = null;
 
         });
 

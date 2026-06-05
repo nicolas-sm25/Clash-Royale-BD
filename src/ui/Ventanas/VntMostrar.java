@@ -3,6 +3,7 @@ package ui.Ventanas;
 import dao.CartaDAO;
 import model.Carta;
 import ui.CreadorComponentes;
+import util.ExportadorTXT;
 
 import java.util.List;
 import javax.swing.*;
@@ -13,6 +14,7 @@ import static ui.CreadorComponentes.invalidacion;
 public class VntMostrar {
 
     CartaDAO dao = new CartaDAO();
+    List<Carta>[] listaCartasExprt = new List[1];
 
     public VntMostrar(){
 
@@ -33,7 +35,13 @@ public class VntMostrar {
         labelInval.setVisible(false);
         ventanaMostrar.add(labelInval);
 
+        JLabel labelExport = CreadorComponentes.crearLabel("Archivo exportado correctamente", 350,460,400,35, new Font("Arial", Font.BOLD | Font.ITALIC, 20));
+        labelExport.setForeground(Color.GREEN);
+        labelExport.setVisible(false);
+        ventanaMostrar.add(labelExport);
+
         List<Carta> listaCartas = dao.listaCartas();
+        listaCartasExprt[0] = listaCartas;
 
         if (dao.getAccionCompletada()){
 
@@ -63,8 +71,20 @@ public class VntMostrar {
 
         btnExport.addActionListener(aeBtnExport -> {
 
-            //Despues lo agrego xdd
+            labelExport.setVisible(false);
+            labelInval.setVisible(false);
 
+            ExportadorTXT.exportar(listaCartasExprt[0]);
+
+            if(ExportadorTXT.getExportacionCompleta()){
+
+                labelExport.setVisible(true);
+
+            } else {
+
+                invalidacion(labelInval, "Error al exportar archivo", 400, 460, 400);
+
+            }
         });
 
 
