@@ -234,6 +234,70 @@ public class CartaDAO {
         } return listaTipo;
     }
 
+    //Metodo para filtros combinados
+
+    public List<Carta> filtrarCartas(String rareza, String tipo, Integer elixir){
+
+        List<Carta> listaFiltrada = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder("SELECT * FROM cartas WHERE 1=1");
+
+        if (rareza != null){
+            sql.append(" AND rareza = ?");
+        }
+
+        if (tipo != null){
+            sql.append(" AND tipo = ?");
+        }
+
+        if(elixir != null){
+            sql.append(" AND costo = ?");
+        }
+
+        try (Connection conn = ConexionDB.getConnection();
+            PreparedStatement psFiltro = conn.prepareStatement(sql.toString())){
+
+            int parametro = 1;
+
+            if(rareza != null){
+                psFiltro.setString(parametro++, rareza);
+            }
+
+            if(tipo != null){
+                psFiltro.setString(parametro++, tipo);
+            }
+
+            if(elixir != null){
+                psFiltro.setInt(parametro++, elixir);
+            }
+
+            ResultSet rsFiltro = psFiltro.executeQuery();
+
+            while (rsFiltro.next()){
+
+                Carta carta = new Carta(
+                        rsFiltro.getString("nombre"),
+                        rsFiltro.getInt("costo"),
+                        rsFiltro.getString("rareza"),
+                        rsFiltro.getString("tipo")
+                );
+
+                carta.setId(rsFiltro.getInt("id"));
+
+                listaFiltrada.add(carta);
+            }
+
+            accionCompletada=true;
+
+        } catch(SQLException e){
+
+            accionCompletada=false;
+
+        }
+        return listaFiltrada;
+    }
+
+
     public boolean getAccionCompletada() {
 
         return accionCompletada;

@@ -61,6 +61,14 @@ public class Botones extends JPanel {
 
         });
 
+        //Boton filtrar
+
+        btnFiltrar.addActionListener(aeBtnFiltrar -> {
+
+            new VntFiltrar();
+
+        });
+
 
 
 
